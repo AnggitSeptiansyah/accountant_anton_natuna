@@ -23,6 +23,15 @@ class Admin_model extends CI_Model {
       'date_created' => time()
     ];
 
+    // Siapkan token
+    $token = base64_encode(random_bytes(32));
+    $admin_token = [
+      'email' => $data['email'],
+      'token' => $token,
+      'date_created' => time()
+    ];
+
     $this->db->insert('admin', $data);
+    $this->db->insert('admin_token', $admin_token);
   }
 }

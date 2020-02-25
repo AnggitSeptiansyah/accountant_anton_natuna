@@ -11,12 +11,13 @@ class Admin extends CI_Controller {
 
   public function index(){
     $data['judul'] = 'Data Admin';
-    $user = $this->db->get_where('user', ['email' => $email])->row_array();
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
+
     $data['admin'] = $this->admin->getAllAdmin();
 
     $this->load->view('templates/header');
     $this->load->view('templates/sidebar');
-    $this->load->view('templates/topbar');
+    $this->load->view('templates/topbar', $data);
     $this->load->view('admin/index', $data);
     $this->load->view('templates/footer');
     
@@ -25,6 +26,7 @@ class Admin extends CI_Controller {
   public function tambah(){
 
     $data['judul'] = 'Tambah Data Admin';
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
     $data['admin'] = $this->admin->getAllAdmin();
     $data['jabatanAdmin'] = $this->db->get('jabatan_admin')->result_array();

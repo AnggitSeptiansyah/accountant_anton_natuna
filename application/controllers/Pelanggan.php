@@ -13,18 +13,21 @@ class Pelanggan extends CI_Controller {
 
   public function index(){
     $data['judul'] = 'Data Pelanggan';
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
     $data['pelanggan'] = $this->pelanggan->getAllPelanggan();
+
 
 
     $this->load->view('templates/header');
     $this->load->view('templates/sidebar');
-    $this->load->view('templates/topbar');
+    $this->load->view('templates/topbar', $data);
     $this->load->view('pelanggan/index', $data);
     $this->load->view('templates/footer');
   }
 
   public function tambah(){
     $data['judul'] = 'Tambah Data Pelanggan';
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
     $this->form_validation->set_rules('kode_pelanggan', 'Kode Pelanggan', 'required|trim');
     $this->form_validation->set_rules('nama', 'Nama Pelanggan', 'required|trim');
@@ -34,7 +37,7 @@ class Pelanggan extends CI_Controller {
     if($this->form_validation->run() == false){
       $this->load->view('templates/header');
       $this->load->view('templates/sidebar');
-      $this->load->view('templates/topbar');
+      $this->load->view('templates/topbar', $data);
       $this->load->view('pelanggan/tambah', $data);
       $this->load->view('templates/footer');
     } else {
