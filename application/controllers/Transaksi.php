@@ -4,6 +4,7 @@ class Transaksi extends CI_Controller {
 
   public function __construct(){
     parent::__construct();
+    is_logged_in();
     $this->load->model('Transaksi_model', 'transaksi');
     $this->load->library('form_validation');
   }
@@ -24,7 +25,7 @@ class Transaksi extends CI_Controller {
 
     $data['judul'] = 'Tambah Transaksi';
     $data['pelanggan'] = $this->db->query("SELECT id, kode_pelanggan, nama_pelanggan FROM pelanggan")->result_array();
-    
+
 
     $this->load->view('templates/header');
     $this->load->view('templates/sidebar');
