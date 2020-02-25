@@ -18,7 +18,7 @@ class Admin_model extends CI_Model {
     $data = [
       'nama' => $this->input->post('nama'),
       'email' => $this->input->post('email'),
-      'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+      'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
       'jabatan_id' => $this->input->post('jabatan_id'),
       'date_created' => time()
     ];

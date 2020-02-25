@@ -9,9 +9,8 @@ class Admin extends CI_Controller {
   }
 
   public function index(){
-    
     $data['judul'] = 'Data Admin';
-
+    $user = $this->db->get_where('user', ['email' => $email])->row_array();
     $data['admin'] = $this->admin->getAllAdmin();
 
     $this->load->view('templates/header');
@@ -38,7 +37,7 @@ class Admin extends CI_Controller {
     if($this->form_validation->run() == false){
       $this->load->view('templates/header');
       $this->load->view('templates/sidebar');
-      $this->load->view('templates/topbar');
+      $this->load->view('templates/topbar', $data);
       $this->load->view('admin/tambah', $data);
       $this->load->view('templates/footer');
     } else {

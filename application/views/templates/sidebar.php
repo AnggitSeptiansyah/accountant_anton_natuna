@@ -67,7 +67,7 @@
 </div>
 
 <li class="nav-item">
-  <a class="nav-link" href="<?= base_url('transaksi') ?>">
+  <a class="nav-link" href="<?= base_url('laporankasharian') ?>">
     <i class="fas fa-fw fa-doc"></i>
     <span>Laporan Kas Harian</span></a>
 </li>

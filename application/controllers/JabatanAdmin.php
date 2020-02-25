@@ -34,7 +34,7 @@ class JabatanAdmin extends CI_Controller {
       $this->load->view('templates/footer');
     } else {
       $this->JabatanAdmin_model->tambahJabatanAdmin();
-      $this->session->set_flashdata('message', '');
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Ditambah</div>');
       redirect('jabatanAdmin');
     }
     

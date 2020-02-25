@@ -6,9 +6,11 @@ class Dashboard extends CI_Controller {
   
   public function index(){
     $data['judul'] = 'Dashboard';
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
+
     $this->load->view('templates/header');
     $this->load->view('templates/sidebar');
-    $this->load->view('templates/topbar');
+    $this->load->view('templates/topbar', $data);
     $this->load->view('dashboard/index', $data);
     $this->load->view('templates/footer');
   }
