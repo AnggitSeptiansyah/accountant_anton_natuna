@@ -1,0 +1,29 @@
+.tanda-tangan {
+  padding-right: 200px;
+}
+
+.identity img{
+  margin-top: -1.5rem;
+  margin-left: -1rem;
+  height: 8rem !important;
+}
+
+.title-invoice {
+  font-size: 4rem;
+  margin-top: 3rem;
+  color: #000;
+  font-weight: 600;
+  font-family: 'Times New Roman', Times, serif;
+  border-bottom: 1px solid #000
+}
+
+.kepada-style {
+  font-weight: 500;
+  color: #000
+}
+
+.no_faktur {
+  color: #000;
+  font-weight: 600;
+  font-family: 'Times New Roman', Times, serif;
+}

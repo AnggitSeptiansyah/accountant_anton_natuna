@@ -44,12 +44,35 @@ class Admin extends CI_Controller {
       $this->load->view('admin/tambah', $data);
       $this->load->view('templates/footer');
     } else {
-      $this->admin->tambahAdmin();
+      $this->admin->editprofile();
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
       Data Admin berhasil dimasukkan</div>');
       redirect('admin');
     }
+  }
+
+  public function edit_profile(){
+    $data['judul'] = 'Edit Data Admin';
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
+
+    $this->form_validation->set_rules('nama', 'Nama User', 'required|trim');
+    $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+    $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]');
+    $this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|min_length[6]|matches[password1]');
     
+
+    if($this->form_validation->run() == false){
+      $this->load->view('templates/header');
+      $this->load->view('templates/sidebar');
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/edit_profile', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $this->admin->editprofile();
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+      Anda Berhasil mengubah profile Anda</div>');
+      redirect('admin');
+    }
   }
 
 }

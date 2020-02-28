@@ -28,8 +28,8 @@
                     <td><?= $i ?></td>
                     <td><?= $jabatanAdmin['nama_jabatan'] ?></td>
                     <td>
-                      <a href="" class="btn btn-sm btn-danger">Delete</a>
-                      <a href="" class="btn btn-sm btn-warning">Update</a>
+                      <a href="<?= base_url() ?>JabatanAdmin/deletejabatan/<?= $jabatanAdmin['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Delete</a>
+                      <a href="<?= base_url() ?>jabatanAdmin/update/<?= $jabatanAdmin['id'] ?>" class="btn btn-sm btn-warning">Update</a>
                     </td>
                   </tr>
                 <?php $i++ ?>

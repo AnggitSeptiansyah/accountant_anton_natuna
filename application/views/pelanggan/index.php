@@ -6,6 +6,7 @@
           <div class="card">
             <h1 class="h3 text-gray-800 mt-3 ml-3"><?= $judul ?></h1>
             <div class="card-body">
+              <?= $this->session->flashdata('message') ?>
               <a href="<?= base_url('pelanggan/tambah') ?>" class="btn btn-primary">Tambah Pelanggan</a>
               <table class="table table-hover table-bordered mt-3">
                 <thead>

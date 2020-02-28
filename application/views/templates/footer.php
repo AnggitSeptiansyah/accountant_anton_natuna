@@ -2,7 +2,7 @@
  <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; Anggit Septiansyah <?= date('Y', time()) ?></span>
           </div>
         </div>
       </footer>
@@ -47,6 +47,12 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?= base_url('assets/') ?>js/sb-admin-2.min.js"></script>
+  <script src="<?= base_url('assets/') ?>js/jquery-editable-select.js"></script>
+  <script src="<?= base_url('assets/') ?>js/custom.js"></script>
+
+  <script>
+    $('#nama_pelanggan').editableSelect();
+  </script>
 
 </body>
 
