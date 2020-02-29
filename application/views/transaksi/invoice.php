@@ -24,56 +24,126 @@
       color: #000;
     }
 
-    table{
+    table th{
       border: 1px solid #000 !important;
+      border-right: none !important;
+      border-left: none !important
+
+    }
+
+    tbody{
+      border-bottom: 1px solid #000 !important;
+      border-right: none !important;
+      border-left: none !important
+      border
+    }
+
+    tbody td{
+      border: none !important;
+      height: -10px !important;
+    }
+
+    
+    .invoice{ 
+      float: right;
+      font-weight: bold;
+      padding-right: 20px;
+    }
+
+    tfoot td{
+      border: none !important;
+    }
+
+    .borbot {
+      border-bottom: 1px solid #000 !important;
+    }
+
+    .margin-kurung{
+      margin-right: 150px;
+    }
+
+    table th{
+      border: 1px solid #000 !important;
+    }
+
+    .table-font{
+      font-size: 16px;
     }
   </style>
 </head>
 
 <body id="page-top">
 
-  <div class="container-fluid">
+  <div class="mt-3">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3 ml-3">
         <div class="identity">
-          <img class="img-kop" src="<?= base_url('assets/img/kop-an.png') ?>" alt="">
+          <img src="<?= base_url('assets/img/logo-an.png') ?>" alt="">
         </div>
       </div>
-      <div class="col-md-4 mt-2 text-center">
-        <h1><span class="title-invoice">Invoice</span></h1>
+      <div class="col-md-5 mt-2 text-center">
+        <h4><span class="title-invoice">Invoice</span></h4>
         <h4><span class="no_faktur">No. <?= $transaksi['no_faktur'] ?></span></h4>
       </div>
-      <div class="col-md-4 mt-2 kepada-style">
+      <div class="col-md-3 mt-2 kepada-style">
         <p>Pekanbaru, <?= date('d F Y', $transaksi['tanggal']) ?></p>
         <p>Kepada Yth,&nbsp;&nbsp;&nbsp;<?= $transaksi['nama_pelanggan'] ?></p>
         <hr>
       </div>
     </div>
 
-    <table class="table table-bordered table-hovered mt-3">
+    <table class="table table-hovered mt-3">
       <thead>
         <tr>
           <th>No</th>
           <th>Keterangan</th>
           <th>Banyak</th>
           <th>Harga</th>
-        </tr>
+        </tr> 
       </thead>
-      <tbody>
+      <tbody class="table-font">
         <?php $i = 1 ?>
         <?php foreach($transaksi_produk as $transaksi_produk) : ?>
-        
-        <tr>
+        <tr height="200">
           <td><?= $i ?></td>
           <td><?= $transaksi_produk['barang'] ?></td>
           <td><?= $transaksi_produk['qty'] ?></td>
           <td><?= $transaksi_produk['harga']; ?></td>
+        
         </tr>
         <?php $i++ ?>
-        <?php endforeach ?>
+        <?php endforeach ?> 
       </tbody>
+      <tfoot class="tfooter">
+        <tr>
+          <td colspan=3><span class="invoice">Total</td>
+          <td><?= $transaksi['total'] ?></td>
+        </tr>
+        <tr>
+          <td colspan=3><span class="invoice">Panjar</td>
+          <td class="borbot"><?= $transaksi['uang_masuk'] ?></td>
+        </tr>
+        <tr>
+          <td colspan=3><span class="invoice">Total Sisa</td>
+          <td><?= $transaksi['total'] - $transaksi['uang_masuk'] ?></td>
+        </tr>
+      </tfoot>
     </table>
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <p class="mb-5">Diterima Oleh</p>
+        <p>(<span class="margin-kurung"></span>)</p>
+      </div>
+      <div class="col-md-6 text-center">
+        <p class="mb-5">Hormat Kami</p>
+        <p>(<span class="margin-kurung"></span>)</p>
+      </div>
+    </div>
   </div>
+
+  <!-- <script type="text/javascript">
+    window.print();
+  </script> -->
 </body>
 </html>
 

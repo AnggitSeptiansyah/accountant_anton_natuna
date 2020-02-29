@@ -11,10 +11,11 @@
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>No Acc</th>
                     <th>No Faktur</th>
                     <th>Pelanggan</th>
                     <th>Total</th>
-                    <th>DP</th>
+                    <th>Uang Masuk</th>
                     <th>Tanggal</th>
                     <th>Action</th>
                   </tr>
@@ -24,10 +25,11 @@
                     <?php foreach($transaksi as $transaksi) : ?>
                     <tr>
                       <th><?= $i ?></th>
+                      <td><?= $transaksi['no_acc'] ?></td>
                       <td><?= $transaksi['no_faktur'] ?></td>
                       <td><?= $transaksi['kode_pelanggan'] ?> - <?= $transaksi['nama_pelanggan'] ?></td>
                       <td><?= $transaksi['total'] ?></td>
-                      <td><?= $transaksi['dp'] ?></td>
+                      <td><?= $transaksi['uang_masuk'] ?></td>
                       <td><?= date('d F Y', $transaksi['tanggal']) ?></td>
                       <td>
                         <a class="btn btn-sm btn-danger" href="">Delete</a>

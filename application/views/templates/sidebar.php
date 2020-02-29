@@ -11,9 +11,15 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item">
-  <a class="nav-link" href="<?= base_url('dashboard') ?>">
+  <a class="nav-link pb-0" href="<?= base_url('dashboard') ?>">
     <i class="fas fa-fw fa-tachometer-alt"></i>
     <span>Dashboard</span></a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('admin/profile') ?>">
+    <i class="fas fa-fw fa-tachometer-alt"></i>
+    <span>Profile</span></a>
 </li>
 
 <!-- Divider -->

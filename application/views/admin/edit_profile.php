@@ -5,7 +5,7 @@
           <div class="card">
             <div class="card-body">
               <h1 class="h3 mb-4 text-gray-800"><?= $judul ?></h1>
-                <?= form_open_multipart('user/edit_profile'); ?>
+                <?= form_open_multipart('admin/edit_profile'); ?>
                 <div class="form-group">
                   <label for="">Nama</label>
                   <input type="text" class="form-control" id="nama" name="nama" value="<?= $user['nama'] ?>">
@@ -31,9 +31,9 @@
                     </div>
                   </div>
               </div>
+
+              <button type="submit" class="btn btn-primary">Ubah Profile</button>
                 
-
-
               </form>
             </div>
           </div>

@@ -25,7 +25,7 @@
                   <?php foreach($laporan as $laporan) : ?>
                   <tr>
                     <td></td>
-                    <td><?= date('d F Y', $laporan['tanggal']) ?></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

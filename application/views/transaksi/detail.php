@@ -4,15 +4,7 @@
           <!-- Page Heading -->
           <div class="card">
             <div class="row">
-              <div class="col-md-6 ml-2 mt-2">
-                <div class="indentity mt-2 ml-3">
-                  <p>Jl. Teratai Atas no. 131 Sukajadi - Pekanbaru</p>
-                  <p>Hp. 0823-2123-3921</p>
-                  <p>Cab. Jl. Surabaya, Harapan Raya - Pekanbaru</p>
-                  <p>Hp 0852 - 3463 - 3453</p>
-                </div>
-              </div>
-              <div class="col-md-5 mt-2">
+              <div class="col-md-5 ml-3 mt-2">
                 <p>Pekanbaru, <?= date('d F Y', $transaksi['tanggal']) ?></p>
                 <p>Kepada Yth,&nbsp;&nbsp;&nbsp;<?= $transaksi['nama_pelanggan'] ?></p>
                 <hr>

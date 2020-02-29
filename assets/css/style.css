@@ -1,11 +1,14 @@
+*{
+  
+}
+
 .tanda-tangan {
   padding-right: 200px;
 }
 
-.identity img{
-  margin-top: -1.5rem;
+.identity img{  
   margin-left: -1rem;
-  height: 8rem !important;
+  height: 4rem !important;
 }
 
 .title-invoice {

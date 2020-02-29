@@ -8,9 +8,17 @@
             <h1 class="h3 text-gray-800 mt-3 ml-3"><?= $judul ?></h1>
             <div class="card-body">
               <form action="" method="post" id="form_tambah_barang">
+
+                <div class="form-group">
+                  <label for="">No Account</label>
+                  <input type="text" class="form-control" name="no_acc" placeholder="Masukkan no acc" value="<?= set_value('no_acc') ?>">
+                  <small class="form-text text-danger"><?= form_error('no_acc') ?></small>
+                </div>
+
                 <div class="form-group">
                   <label>No Faktur</label>
-                  <input type="text" name="no_faktur" class="form-control" value="<?= set_value('no_faktur') ?>">
+                  <input type="text" name="no_faktur" placeholder="Masukkan No Faktur" class="form-control" value="<?= set_value('no_faktur') ?>">
+                  <small class="form-text text-danger"><?= form_error('no_faktur') ?></small>
                 </div>
                 <div class="form-group">
                   <label for="">Pelanggan</label>
@@ -45,14 +53,15 @@
                 <button class="badge btn_tambah_barang badge-secondary mb-2" type="button"><i class="fas fa-plus-circle"></i> Tambah Barang</button>
                 <div class="form-group">
                   <label for="">Total Harga</label>
-                  <input type="text" class="form-control" name="total" placeholder="Masukkan Total Harga">
+                  <input type="text" class="form-control" name="total" placeholder="Masukkan Total Harga" value="<?= set_value('total') ?>">
+                  <small class="form-text text-danger"><?= form_error('total') ?></small>
                 </div>
 
                 <div class="form-group">
-                  <label for="">DP</label>
-                  <input type="text" class="form-control" name="dp" placeholder="Masukkan DP yang Dibayar">
+                  <label for="">Uang Masuk</label>
+                  <input type="text" class="form-control" name="masukan" placeholder="Masukkan Uang Masuk yang Dibayar pelanggan" value="<?= set_value('masukan') ?>">
+                  <small class="form-text text-danger"><?= form_error('masukan') ?></small>
                 </div>
-
 
                 <button id="tambahBarang" class="btn btn-primary" type='submit'>Tambah Transaksi</button>
               </form>
