@@ -70,28 +70,7 @@ class Admin_model extends CI_Model {
   }
 
   public function change_password(){
-      $current_password = $this->input->post('current_password');
-      $new_password = $this->input->post('new_password1');
-
-      if(!password_verify($current_password, $data['user']['password'])){
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Current Password</div>');
-        redirect('admin/change_password');
-      } else {
-        if($current_password == $new_password){
-          $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New Password cannot be the same as current password</div>');
-          redirect('admin/change_password');
-        } else {
-          // Password sudah berbeda
-          $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
-
-          $this->db->set('password', $password_hash);
-          $this->db->where('email', $data['user']['email']);
-          $this->db->update('admin');
-
-          $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password has been Change Successfully</div>');
-          redirect('admin/change_password');
-        }
-      }
+      
   }
 
   

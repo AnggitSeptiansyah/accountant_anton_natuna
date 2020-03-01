@@ -58,6 +58,12 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="">Keterangan</label>
+                  <input type="text" class="form-control" name="keterangan" placeholder="Masukkan Keterangan Transaksi" value="<?= set_value('keterangan') ?>">
+                  <small class="form-text text-danger"><?= form_error('keterangan') ?></small>
+                </div>
+
+                <div class="form-group">
                   <label for="">Uang Masuk</label>
                   <input type="text" class="form-control" name="masukan" placeholder="Masukkan Uang Masuk yang Dibayar pelanggan" value="<?= set_value('masukan') ?>">
                   <small class="form-text text-danger"><?= form_error('masukan') ?></small>

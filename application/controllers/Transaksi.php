@@ -14,8 +14,14 @@ class Transaksi extends CI_Controller {
     $data['judul'] = 'Transaksi';
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
+    $this->load->library('pagination');
+    $config['per_page'] = 3;
 
-    $data['transaksi'] = $this->transaksi->getAllTransaksi();
+    $this->pagination->initialize($config);
+
+    $data['start'] = $this->uri->segment(3);
+    
+    $data['transaksi'] = $this->transaksi->getAllTransaksi($config['per_page'], $data['start']);
 
     $this->load->view('templates/header');
     $this->load->view('templates/sidebar');
@@ -32,7 +38,6 @@ class Transaksi extends CI_Controller {
     $data['transaksi'] = $this->transaksi->getTransaksiById($id);
     $data['transaksi_produk'] = $this->transaksi->getDetailTransaksi($id);
     
-
     $this->load->view('templates/header');
     $this->load->view('templates/sidebar');
     $this->load->view('templates/topbar', $data);
@@ -45,13 +50,8 @@ class Transaksi extends CI_Controller {
 
       $data['transaksi'] = $this->transaksi->getTransaksiById($id);
       $data['transaksi_produk'] = $this->transaksi->getDetailTransaksi($id);
-      $html_content = $this->load->view('transaksi/invoice', $data);
+      $this->load->view('transaksi/invoice', $data);
 
-      $this->load->library('pdf');
-      $this->pdf->loadHtml($html_content);
-      $this->pdf->setPaper('A4', 'landscape');
-      $this->pdf->render();
-      $this->pdf->stream("invoice.pdf", array('Attachment'=>0));
 
       
   }

@@ -10,6 +10,11 @@ class Auth extends CI_Controller {
   }
 
   public function index(){
+
+    if ($this->session->userdata('email')){
+      redirect('dashboard');
+    }
+
     $data['judul'] = 'Login';
 
     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');

@@ -29,8 +29,8 @@
                       <td><?= $pelanggan['alamat'] ?></td>
                       <td><?= $pelanggan['telp'] ?></td>
                       <td>
-                        <a class="btn btn-sm btn-danger" href="">Delete</a>
-                        <a class="btn btn-sm btn-warning" href="">Update</a>
+                        <a class="btn btn-sm btn-danger" href="<?= base_url('pelanggan/delete/') ?><?= $pelanggan['id'] ?>" onclick="return confirm('Apakah anda ingin menghapus data ini?')">Delete</a>
+                        <a class="btn btn-sm btn-warning" href="<?= base_url('pelanggan/update/') ?><?= $pelanggan['id'] ?>">Update</a>
                       </td>
                     </tr>
                     <?php endforeach ; ?>

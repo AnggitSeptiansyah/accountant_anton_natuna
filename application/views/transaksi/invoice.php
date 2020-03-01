@@ -26,8 +26,8 @@
 
     table th{
       border: 1px solid #000 !important;
-      border-right: none !important;
-      border-left: none !important
+      border-right: 1px solid #000 !important;
+      border-left: 1px solid #000 !important;
 
     }
 
@@ -40,7 +40,7 @@
 
     tbody td{
       border: none !important;
-      height: -10px !important;
+      
     }
 
     
@@ -104,7 +104,7 @@
       <tbody class="table-font">
         <?php $i = 1 ?>
         <?php foreach($transaksi_produk as $transaksi_produk) : ?>
-        <tr height="200">
+        <tr>
           <td><?= $i ?></td>
           <td><?= $transaksi_produk['barang'] ?></td>
           <td><?= $transaksi_produk['qty'] ?></td>
@@ -141,9 +141,9 @@
     </div>
   </div>
 
-  <!-- <script type="text/javascript">
+  <script type="text/javascript">
     window.print();
-  </script> -->
+  </script>
 </body>
 </html>
 

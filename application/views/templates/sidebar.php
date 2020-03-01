@@ -77,10 +77,17 @@
 
 
 <li class="nav-item">
-  <a class="nav-link pb-0" href="<?= base_url('laporankasharian') ?>">
+  <a class="nav-link pb-0" href="<?= base_url('piutang') ?>">
     <i class="fas fa-fw fa-doc"></i>
     <span>Piutang</span></a>
 </li>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('worksheet') ?>">
+    <i class="fas fa-fw fa-doc"></i>
+    <span>Worksheet</span></a>
+</li>
+
 
 
 <!-- Divider -->

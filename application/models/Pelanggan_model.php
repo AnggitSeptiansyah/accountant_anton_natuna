@@ -19,4 +19,16 @@ class Pelanggan_model extends CI_Model {
     $this->db->insert('pelanggan', $data);
   }
 
+  public function ubahPelanggan(){
+    $data = [
+      'kode_pelanggan' => $this->input->post('kode_pelanggan', true),
+      'nama_pelanggan' => $this->input->post('nama', true),
+      'alamat' => $this->input->post('alamat', true),
+      'telp' => $this->input->post('telepon', true),
+    ];
+
+    $this->db->where('id', $this->input->post('id'));
+    $this->db->update('pelanggan', $data);
+  }
+
 }

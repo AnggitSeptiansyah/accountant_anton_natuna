@@ -13,7 +13,7 @@
                   <label for="">Nama Jabatan</label>
                   <input type="text" class="form-control" placeholder="Masukkan Jenis Jabatan" name="nama_jabatan" value="<?= $jabatan['nama_jabatan'] ?>">
                 </div>
-                <button class="btn btn-primary" type='submit'>Tambah Jabatan</button>
+                <button class="btn btn-primary" type='submit'>Ubah Jabatan</button>
                 
               </form>
             </div>

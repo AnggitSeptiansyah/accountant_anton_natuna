@@ -32,17 +32,26 @@
                       <td><?= $transaksi['uang_masuk'] ?></td>
                       <td><?= date('d F Y', $transaksi['tanggal']) ?></td>
                       <td>
-                        <a class="btn btn-sm btn-danger" href="">Delete</a>
-                        <a class="btn btn-sm btn-warning" href="">Update</a>
-                        <a class="btn btn-sm btn-dark" href="<?= base_url('') ?>transaksi/detail/<?= $transaksi['id'] ?>">invoice</a>
-                        <a class="btn btn-sm btn-success" href="<?= base_url('') ?>transaksi/surat_jalan/<?= $transaksi['id'] ?>">Surat Jalan</a>
+                        <a class="badge badge-danger" href="">Delete</a>
+                        <a class="badge badge-warning" href="">Update</a>
+                        <a class="badge badge-dark" href="<?= base_url('') ?>transaksi/detail/<?= $transaksi['id'] ?>">invoice</a>
+                        <a class="badge badge-success" href="<?= base_url('') ?>transaksi/surat_jalan/<?= $transaksi['id'] ?>">Surat Jalan</a>
                       </td>
                     </tr>
                     <?php $i++ ?>
                     <?php endforeach; ?>
                 </tbody>
               </table>
-              <a href="<?= base_url('transaksi/tambahTransaksi') ?>" class="btn btn-primary">Tambah Transaksi</a>
+              <div class="row">
+                <!-- <div class="col-md-9">
+                  #<?= $this->pagination->create_links(); ?>#
+                </div> -->
+                <div class="col-md-2">
+                  <a href="<?= base_url('transaksi/tambahTransaksi') ?>" class="btn btn-primary btn-sm">Tambah Transaksi</a>
+                </div>
+                
+              </div>
+              
             </div>
         </div>
         <!-- /.container-fluid -->

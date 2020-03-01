@@ -25,7 +25,6 @@
                 <tbody>
                   <?php $i = 1 ?>
                   <?php foreach($transaksi_produk as $transaksi_produk) : ?>
-                  
                   <tr>
                     <td><?= $i ?></td>
                     <td><?= $transaksi_produk['barang'] ?></td>

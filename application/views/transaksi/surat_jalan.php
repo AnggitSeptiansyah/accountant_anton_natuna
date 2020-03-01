@@ -26,15 +26,16 @@
 
     table th{
       border: 1px solid #000 !important;
-      border-right: none !important;
-      border-left: none !important
+      border-right: 1px solid #000 !important;
+      border-left: 1px solid #000 !important;
+      
 
     }
 
     table td{
       border-bottom: 1px solid #000 !important;
-      border-right: none !important;
-      border-left: none !important
+      border-right: 1px solid #000 !important;
+      border-left: 1px solid #000 !important;
 
     }
 
@@ -108,7 +109,7 @@
                   <?php $i = 1 ?>
                   <?php foreach($transaksi_produk as $transaksi_produk) : ?>
                   
-                  <tr height="200">
+                  <tr>
                     <td><?= $i ?></td>
                     <td><?= $transaksi_produk['barang'] ?></td>
                     <td><?= $transaksi_produk['qty'] ?></td>
