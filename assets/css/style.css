@@ -12,21 +12,26 @@
 }
 
 .title-invoice {
-  font-size: 4rem;
+  font-size: 20pt;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif !important;
   margin-top: 3rem;
   color: #000;
-  font-weight: 600;
+  font-weight: 400;
   font-family: 'Times New Roman', Times, serif;
   border-bottom: 1px solid #000
 }
 
 .kepada-style {
-  font-weight: 500;
-  color: #000
+  font-weight: 400;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  line-height: 10px;
+  height: 10px;
 }
 
 .no_faktur {
   color: #000;
-  font-weight: 600;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Arial;
 }

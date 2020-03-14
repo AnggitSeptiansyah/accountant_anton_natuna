@@ -39,12 +39,12 @@ class Admin extends CI_Controller {
 
     if($this->form_validation->run() == false){
       $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar');
+      $this->load->view('templates/sidebar', $data);
       $this->load->view('templates/topbar', $data);
       $this->load->view('admin/tambah', $data);
       $this->load->view('templates/footer');
     } else {
-      $this->admin->editprofile();
+      $this->admin->tambahAdmin();  
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
       Data Admin berhasil dimasukkan</div>');
       redirect('admin');
@@ -56,7 +56,7 @@ class Admin extends CI_Controller {
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array(); 
 
     $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar');
+    $this->load->view('templates/sidebar', $data);
     $this->load->view('templates/topbar', $data);
     $this->load->view('admin/profile', $data);
     $this->load->view('templates/footer');
@@ -72,7 +72,7 @@ class Admin extends CI_Controller {
 
     if($this->form_validation->run() == false){
       $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar');
+      $this->load->view('templates/sidebar', $data);
       $this->load->view('templates/topbar', $data);
       $this->load->view('admin/edit_profile', $data);
       $this->load->view('templates/footer');
@@ -94,7 +94,7 @@ class Admin extends CI_Controller {
 
     if($this->form_validation->run() == false){
       $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar');
+      $this->load->view('templates/sidebar', $data);
       $this->load->view('templates/topbar', $data);
       $this->load->view('admin/change_password', $data);
       $this->load->view('templates/footer');

@@ -17,7 +17,7 @@ class JabatanAdmin extends CI_Controller {
     $data['jabatanAdmin'] = $this->JabatanAdmin_model->getAllJabatanAdmin();
 
     $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar');
+    $this->load->view('templates/sidebar', $data);
     $this->load->view('templates/topbar', $data);
     $this->load->view('jabatan_admin/index', $data);
     $this->load->view('templates/footer');
@@ -31,7 +31,7 @@ class JabatanAdmin extends CI_Controller {
 
     if($this->form_validation->run() == false){
       $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar');
+      $this->load->view('templates/sidebar', $data);
       $this->load->view('templates/topbar', $data);
       $this->load->view('jabatan_admin/tambah', $data);
       $this->load->view('templates/footer');
@@ -60,7 +60,7 @@ class JabatanAdmin extends CI_Controller {
 
     if($this->form_validation->run() == false){
       $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar');
+      $this->load->view('templates/sidebar', $data);
       $this->load->view('templates/topbar', $data);
       $this->load->view('jabatan_admin/update', $data);
       $this->load->view('templates/footer');

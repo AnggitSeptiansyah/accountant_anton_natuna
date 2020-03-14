@@ -46,10 +46,6 @@
     .margin-top{
       margin-top: 110px;
     }
-
-    .margin-card{
-      margin-top: -50px;
-    }
   </style>
 </head>
 
@@ -85,9 +81,7 @@
               </div>
 
               <div class="col-md-4 margin-top">
-                <p>Kepada, Yth</p><?= $transaksi['nama_pelanggan'] ?></p>
-                <hr>
-                <p>Di</p>
+                <p>Kepada, Yth : <?= $transaksi['nama_pelanggan'] ?></p>
                 <hr>
               </div>
             </div>

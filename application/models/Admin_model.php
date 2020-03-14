@@ -20,19 +20,12 @@ class Admin_model extends CI_Model {
       'email' => $this->input->post('email'),
       'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
       'jabatan_id' => $this->input->post('jabatan_id'),
-      'date_created' => time()
+      'img' => "default.png",
+      'date_created' => time(),
     ];
 
-    // Siapkan token
-    $token = base64_encode(random_bytes(32));
-    $admin_token = [
-      'email' => $data['email'],
-      'token' => $token,
-      'date_created' => time()
-    ];
-
+    // Siapkan token 
     $this->db->insert('admin', $data);
-    $this->db->insert('admin_token', $admin_token);
   }
 
   public function editprofile(){

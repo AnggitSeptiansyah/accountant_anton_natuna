@@ -19,7 +19,7 @@
 
                   <form class="user" method="post" action="<?= base_url('auth') ?>">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user"placeholder="Enter Email Address..." name="email">
+                      <input type="email" class="form-control form-control-user"placeholder="Enter Email Address..." name="email" value="<?= set_value('email') ?>">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user"placeholder="Password" name="password">

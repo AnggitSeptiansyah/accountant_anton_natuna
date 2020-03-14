@@ -58,8 +58,8 @@ class Auth extends CI_Controller {
   public function logout(){
     $this->session->unset_userdata('email');
     $this->session->unset_userdata('jabatan_id');
-    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kamu telah LogIut</div>');
-    redirect('auth');
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kamu telah Logut</div>');
+    redirect('auth'); 
   }
 
   

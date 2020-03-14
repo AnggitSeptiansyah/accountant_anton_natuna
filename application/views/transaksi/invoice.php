@@ -22,36 +22,59 @@
   <style>
     *{
       color: #000;
+      font-family: "Arial Narrow";
+      font-size: 14pt;      
     }
+
+    .identity{
+      font-weight: 400;
+      font-size: 16pt;
+    }
+
+    
 
     table th{
       border: 1px solid #000 !important;
       border-right: 1px solid #000 !important;
       border-left: 1px solid #000 !important;
-
+      text-transform: uppercase;
+      line-height: 25px;
+      font-size: 13pt;
+      font-weight: 400;
+      text-align: center;
     }
 
     tbody{
       border-bottom: 1px solid #000 !important;
       border-right: none !important;
       border-left: none !important
-      border
     }
 
     tbody td{
       border: none !important;
+      border-right: 1px solid #000 !important;
+      border-left: 1px solid #000 !important;
+      line-height: 0;
+      height: 0;
+      font-size: 13pt;
       
     }
 
+    tfoot td{
+      line-height: 5px;
+      height: 5px;
+      font-size: 13pt;
+      
+    }
     
     .invoice{ 
       float: right;
-      font-weight: bold;
+      font-weight: 500;
       padding-right: 20px;
     }
 
     tfoot td{
-      border: none !important;
+      border: none !important;    
     }
 
     .borbot {
@@ -69,6 +92,39 @@
     .table-font{
       font-size: 16px;
     }
+
+    .kalimat-peringatan{
+      width: 600px;
+      margin-left: 100px;
+      color: #000;
+      margin-bottom: 7rem;
+      margin-top: -8rem;
+    }
+
+    .pinggir {
+      text-align: right !important;
+    }
+
+    .nama {
+      font-size: 15pt !important 
+    }
+
+    .middle { 
+      margin-top: -30px !important;
+    }
+
+    .pinggir-kiri {
+
+      text-align: left;
+    }
+
+    .tulisan-kanan{
+      font-size: 13pt;
+    }
+
+    .capitalized {
+      text-transform: capitalize;
+    }
   </style>
 </head>
 
@@ -78,65 +134,81 @@
     <div class="row">
       <div class="col-md-3 ml-3">
         <div class="identity">
-          <img src="<?= base_url('assets/img/logo-an.png') ?>" alt="">
+          CV. ANTON NATUNA
         </div>
       </div>
       <div class="col-md-5 mt-2 text-center">
         <h4><span class="title-invoice">Invoice</span></h4>
-        <h4><span class="no_faktur">No. <?= $transaksi['no_faktur'] ?></span></h4>
+        <h5 class="no_faktur">No. <?= $transaksi['no_faktur'] ?></h5>
       </div>
       <div class="col-md-3 mt-2 kepada-style">
         <p>Pekanbaru, <?= date('d F Y', $transaksi['tanggal']) ?></p>
-        <p>Kepada Yth,&nbsp;&nbsp;&nbsp;<?= $transaksi['nama_pelanggan'] ?></p>
-        <hr>
+        <p>Kepada Yth,&nbsp;&nbsp;&nbsp;<span class="nama"><?= $transaksi['nama_pelanggan'] ?></span></p>
+        <p>Telp / HP &nbsp;&nbsp;&nbsp;<?= $transaksi['telp'] ?></p>
       </div>
     </div>
 
     <table class="table table-hovered mt-3">
       <thead>
         <tr>
-          <th>No</th>
-          <th>Keterangan</th>
-          <th>Banyak</th>
-          <th>Harga</th>
+          <th class="middle">No</th>
+          <th class="middle">Keterangan</th>
+          <th class="middle">Jumlah</th>
+          <th class="middle">Satuan</th>
+          <th>@ <span class="capitalized">Rp.</span></th>
+          <th class="middle">Jumlah Harga (Rp.)</th>
         </tr> 
       </thead>
       <tbody class="table-font">
         <?php $i = 1 ?>
         <?php foreach($transaksi_produk as $transaksi_produk) : ?>
         <tr>
-          <td><?= $i ?></td>
-          <td><?= $transaksi_produk['barang'] ?></td>
-          <td><?= $transaksi_produk['qty'] ?></td>
-          <td><?= $transaksi_produk['harga']; ?></td>
-        
-        </tr>
+          <td class="pinggir"><?= $i ?></td>
+          <td style="width: 500px"><?= $transaksi_produk['barang'] ?></td>
+          <td class="pinggir" style="width: 50px;"><?= $transaksi_produk['qty'] ?></td>
+          <td style="width: 50px;"><?= $transaksi_produk['satuan'] ?></td>
+          <td class="pinggir" style="width: 135px"><?= $transaksi_produk['harga'] ?></td>
+          <td class="pinggir"><?= number_format($transaksi_produk['total_harga']) ?></td>
+        </tr> 
         <?php $i++ ?>
         <?php endforeach ?> 
       </tbody>
       <tfoot class="tfooter">
         <tr>
-          <td colspan=3><span class="invoice">Total</td>
-          <td><?= $transaksi['total'] ?></td>
+          <td colspan=5><span class="invoice">Total</td>
+          <td>Rp. <div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format($transaksi['total']) ?></div></td>
         </tr>
         <tr>
-          <td colspan=3><span class="invoice">Panjar</td>
-          <td class="borbot"><?= $transaksi['uang_masuk'] ?></td>
+          <td colspan=5><span class="invoice">Diskon</td>
+          <td>Rp <div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format($transaksi['diskon']) ?></div></td>
         </tr>
         <tr>
-          <td colspan=3><span class="invoice">Total Sisa</td>
-          <td><?= $transaksi['total'] - $transaksi['uang_masuk'] ?></td>
+          <?php $transaksi['total'] - $transaksi['diskon'] ?>
+          <td colspan=5><span class="invoice">Total yang Dibayar</td>
+          <td>Rp <div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format() ?></div></td>
+        </tr>
+        <tr>
+          <td colspan=5><span class="invoice">Panjar</td>
+          <td class="borbot">Rp. <div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format($transaksi['uang_masuk']) ?></div></td>
+        </tr>
+        <tr>
+          <td colspan=5><span class="invoice">Total Sisa</td>
+          <td>Rp.<div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format($transaksi['total'] - $transaksi['uang_masuk']) ?></div></td>
         </tr>
       </tfoot>
+      
     </table>
+    <div class="kalimat-peringatan">
+        Keterangan: Barang yang sudah dipesan tidak dapat dibatalkan
+    </div>
     <div class="row">
       <div class="col-md-4 text-center">
         <p class="mb-5">Diterima Oleh</p>
-        <p>(<span class="margin-kurung"></span>)</p>
+        <p>________________</p>
       </div>
       <div class="col-md-6 text-center">
         <p class="mb-5">Hormat Kami</p>
-        <p>(<span class="margin-kurung"></span>)</p>
+        <p>________________</p>
       </div>
     </div>
   </div>

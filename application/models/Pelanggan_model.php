@@ -2,9 +2,12 @@
 
 class Pelanggan_model extends CI_Model {
  
-  public function getAllPelanggan(){
-    $query = "SELECT * FROM pelanggan";
-
+  public function getAllPelanggan($keyword = null){
+    if($keyword){
+      $query = "SELECT * FROM pelanggan WHERE nama_pelanggan LIKE '%$keyword%' OR kode_pelanggan LIKE '%$keyword%'";
+    } else {
+      $query = "SELECT * FROM pelanggan";
+    }
     return $this->db->query($query)->result_array();
   }
 
@@ -30,5 +33,14 @@ class Pelanggan_model extends CI_Model {
     $this->db->where('id', $this->input->post('id'));
     $this->db->update('pelanggan', $data);
   }
+
+  public function getDetailPelanggan($id){
+    return $this->db->get_where('pelanggan', ['id'=>$id])->row_array();
+  }
+
+  public function getTransaksiPelanggan($id){
+    return $this->db->get_where('transaksi', ['costumer_id' => $id])->result_array();
+  }
+
 
 }

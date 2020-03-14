@@ -1,22 +1,36 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+        <div class="card">
           <!-- Page Heading -->
 
-          
+          <div class="card-body">
             <h1 class="h3 text-gray-800 mt-3 ml-3"><?= $judul ?></h1>
-            <div class="card-body">
+              <div class="row">
+                <div class="col-md-10">
+                <form class="form-inline my-2 my-lg-0"  method="post" action="<?= base_url('transaksi') ?>">
+                  <input class="form-control col-md-8" type="search" placeholder="Search" aria-label="Search" name="keyword">
+                  <div class="input-group-append">
+                    <input name="submit" class="btn btn-outline-primary" type="submit" autocomplete='off' autofocus>
+                  </div>
+                </form>
+                </div>
+                <div class="col-md-2">
+                <a href="<?= base_url('transaksi/tambahTransaksi') ?>" class="btn btn-primary">Tambah Transaksi</a>
+                </div>
+              </div>
               <?= $this->session->flashdata('message'); ?>
               <table class="table table-hover table-bordered mt-3">
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Tanggal</th>
                     <th>No Acc</th>
                     <th>No Faktur</th>
                     <th>Pelanggan</th>
                     <th>Total</th>
                     <th>Uang Masuk</th>
-                    <th>Tanggal</th>
+                    <th>Dibuat oleh</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -25,15 +39,15 @@
                     <?php foreach($transaksi as $transaksi) : ?>
                     <tr>
                       <th><?= $i ?></th>
+                      <td><?= date('d-m-Y', $transaksi['tanggal']) ?></td>
                       <td><?= $transaksi['no_acc'] ?></td>
                       <td><?= $transaksi['no_faktur'] ?></td>
                       <td><?= $transaksi['kode_pelanggan'] ?> - <?= $transaksi['nama_pelanggan'] ?></td>
-                      <td><?= $transaksi['total'] ?></td>
-                      <td><?= $transaksi['uang_masuk'] ?></td>
-                      <td><?= date('d F Y', $transaksi['tanggal']) ?></td>
+                      <td>Rp. <?= number_format($transaksi['total']) ?></td>
+                      <td>Rp. <?= number_format($transaksi['uang_masuk']) ?></td>
+                      <td><?= $transaksi['created_by'] ?></td>
                       <td>
-                        <a class="badge badge-danger" href="">Delete</a>
-                        <a class="badge badge-warning" href="">Update</a>
+                        <a class="badge badge-danger" href="<?= base_url('') ?>transaksi/update/<?= $transaksi['id'] ?>">Pembayaran</a>
                         <a class="badge badge-dark" href="<?= base_url('') ?>transaksi/detail/<?= $transaksi['id'] ?>">invoice</a>
                         <a class="badge badge-success" href="<?= base_url('') ?>transaksi/surat_jalan/<?= $transaksi['id'] ?>">Surat Jalan</a>
                       </td>
@@ -42,18 +56,10 @@
                     <?php endforeach; ?>
                 </tbody>
               </table>
-              <div class="row">
-                <!-- <div class="col-md-9">
-                  #<?= $this->pagination->create_links(); ?>#
-                </div> -->
-                <div class="col-md-2">
-                  <a href="<?= base_url('transaksi/tambahTransaksi') ?>" class="btn btn-primary btn-sm">Tambah Transaksi</a>
-                </div>
-                
-              </div>
-              
             </div>
-        </div>
+          
+          </div>
         <!-- /.container-fluid -->
+        </div>
       </div>
       <!-- End of Main Content -->

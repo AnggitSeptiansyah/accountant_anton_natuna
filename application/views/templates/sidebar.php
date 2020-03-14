@@ -10,6 +10,62 @@
 <hr class="sidebar-divider mt-3 my-0">
 
 <!-- Nav Item - Dashboard -->
+
+<?php if($user['jabatan_id'] == 5) : ?>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('admin/profile') ?>">
+    <i class="fas fa-fw fa-tachometer-alt"></i>
+    <span>Profile</span></a>
+</li>
+
+<hr class="sidebar-divider mt-3">
+
+<div class="sidebar-heading">
+  Pelanggan
+</div>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('pelanggan') ?>">
+    <i class="fas fa-fw fa-user"></i>
+    <span>Pelanggan</span></a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('transaksi') ?>">
+    <i class="fas fa-fw fa-user"></i>
+    <span>Transaksi</span></a>
+</li>
+
+
+<hr class="sidebar-divider mt-3">
+
+<div class="sidebar-heading">
+  Laporan
+</div>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('laporankasharian') ?>">
+    <i class="fas fa-fw fa-doc"></i>
+    <span>Laporan Kas Harian</span></a>
+</li>
+
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('worksheet') ?>">
+    <i class="fas fa-fw fa-doc"></i>
+    <span>Worksheet</span></a>
+</li>
+
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('piutang') ?>">
+    <i class="fas fa-fw fa-doc"></i>
+    <span>Piutang</span></a>
+</li>
+
+<?php else : ?>
+
 <li class="nav-item">
   <a class="nav-link pb-0" href="<?= base_url('dashboard') ?>">
     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -22,7 +78,6 @@
     <span>Profile</span></a>
 </li>
 
-<!-- Divider -->
 <hr class="sidebar-divider mt-3">
 
 <!-- Heading -->
@@ -47,9 +102,11 @@
 
 <hr class="sidebar-divider mt-3">
 
+
 <div class="sidebar-heading">
   Pelanggan
 </div>
+
 
 <li class="nav-item">
   <a class="nav-link pb-0" href="<?= base_url('pelanggan') ?>">
@@ -77,16 +134,54 @@
 
 
 <li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('worksheet') ?>">
+    <i class="fas fa-fw fa-doc"></i>
+    <span>Worksheet</span></a>
+</li>
+
+
+<li class="nav-item">
   <a class="nav-link pb-0" href="<?= base_url('piutang') ?>">
     <i class="fas fa-fw fa-doc"></i>
     <span>Piutang</span></a>
 </li>
 
+
+
+<hr class="sidebar-divider mt-3">
+
+<div class="sidebar-heading">
+  Logistik
+</div>
+
 <li class="nav-item">
   <a class="nav-link pb-0" href="<?= base_url('worksheet') ?>">
     <i class="fas fa-fw fa-doc"></i>
-    <span>Worksheet</span></a>
+    <span>Supplier</span></a>
 </li>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('worksheet') ?>">
+    <i class="fas fa-fw fa-doc"></i>
+    <span>Stock</span></a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('piutang') ?>">
+    <i class="fas fa-fw fa-info"></i>
+    <span>Utang</span></a>
+</li> 
+
+
+
+<?php endif; ?>
+
+
+<!-- Nav Item - Tables -->
+
+
+
+
 
 
 
