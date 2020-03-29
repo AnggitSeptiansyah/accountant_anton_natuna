@@ -1,115 +1,118 @@
 
 
+this.count = 0;
 
-CountBox = 0;
+document.addEventListener("click", (e) => {
+	const type = e.target.id;
 
-const tambahForm = document.querySelector(".btn_tambah_barang");
+	if (type == "button") {
+		const container = document.getElementById('container_input_barang');
+		++this.count;
 
-tambahForm.addEventListener("click", function (e) {
-	let breakNote = document.createElement("br");
+		const transaksi_barang = document.createElement('div');
+		transaksi_barang.className = "row";
 
-	let formGroupforBarang = document.createElement("div");
-	formGroupforBarang.classList.add("form-group");
+		const input_transaksi = `
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="">Barang yang Dipesan</label>
+					<input type="text" class="form-control"  name="barang[]" id="barang-${this.count}">
+				</div>
+			</div>
+			<div class="col-md-1">
+				<div class="form-group">
+					<label for="">Qty</label>
+					<input type="text" value="0" class="form-control quantity" name="qty[]" id="qty-${this.count}">
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="">Satuan</label>
+					<input type="text" class="form-control" name="satuan[]" id="satuan-${this.count}">
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="">Harga</label>
+					<input type="text" class="form-control input_harga" value="0" name="harga[]" id="harga-${this.count}">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="">Total Harga Barang</label>
+					<input type="text" class="form-control total_harga_barang" value="0" name="total_harga_barang[]" value="0" id="total_harga_barang-${this.count}">
+				</div>
+			</div>
+		`
 
-	let formGroupforQty = document.createElement("div");
-	formGroupforQty.classList.add("form-group");
+		transaksi_barang.innerHTML += input_transaksi;
 
-	let formGroupforHarga = document.createElement("div");
-	formGroupforHarga.classList.add("form-group");
+		container.appendChild(transaksi_barang);
+	}
+});
 
-	let formGroupforSatuan = document.createElement("div");
-	formGroupforSatuan.classList.add("form-group");
+document.addEventListener('keyup', (e) => {
+	const type = e.target.id.split("-")[0]
 
-	let formGroupforTotalHarga = document.createElement("div");
-	formGroupforTotalHarga.classList.add("form-group");
-
-	let input_barang = document.createElement("input");
-	input_barang.type = "text";
-	input_barang.name = "barang[]";
-	input_barang.placeholder = "Masukkan Jenis Barang";
-	input_barang.classList.add("form-control");
-
-
-	let input_qty = document.createElement("input");
-	input_qty.type = "number";
-	input_qty.name = "qty[]";
-	input_qty.placeholder = "Qty";
-	input_qty.classList.add("form-control");
-
-	let input_harga = document.createElement("input");
-	input_harga.type = "number";
-	input_harga.name = "harga[]";
-	input_harga.placeholder = "Harga Barang";
-	input_harga.classList.add("form-control", "harga_barang");
-
-	let input_satuan = document.createElement("input");
-	input_satuan.type = "text";
-	input_satuan.name = "satuan[]";
-	input_satuan.placeholder = "Satuan Barang";
-	input_satuan.classList.add("form-control");
-
-	let input_total_harga_barang = document.createElement("input");
-	input_total_harga_barang.type = "text";
-	input_total_harga_barang.name = "total_harga_barang[]";
-	input_total_harga_barang.placeholder = "Total Harga Barang";
-	input_total_harga_barang.classList.add("form-control", "total_harga_barang");
-
-
-	let container = document.getElementById("barang");
-	container.appendChild(formGroupforBarang);
-	formGroupforBarang.appendChild(input_barang);
-
-
-	let container_qty = document.getElementById("qty");
-	container_qty.appendChild(formGroupforQty);
-	formGroupforQty.appendChild(input_qty);
+	if (type == "qty") {
+		changeQty(e);
+	} else if (type == "harga") {
+		changePrice(e);
+	}
 
 
-	let container_harga = document.getElementById("harga");
-	container_harga.appendChild(formGroupforHarga);
-	formGroupforHarga.appendChild(input_harga);
+})
 
-	let container_satuan = document.getElementById("satuan");
-	container_satuan.appendChild(formGroupforSatuan);
-	formGroupforSatuan.appendChild(input_satuan);
+const counting = (price, qty) => {
+	return price * qty;
+}
 
-	let container_total_harga_barang = document.getElementById("total_harga_barang");
-	container_total_harga_barang.appendChild(formGroupforTotalHarga);
-	formGroupforTotalHarga.appendChild(input_total_harga_barang);
+const changePrice = (e) => {
+	const id = e.target.id.split("-")[1];
 
-	let totalHargaBarangValue = document.querySelector('.total_harga_barang');
+	const qty = document.getElementById("qty-" + id).value;
+	const amount = document.getElementById("total_harga_barang-" + id);
 
-	totalHargaBarangValue.addEventListener('onchange', function () {
-		document.querySelector('#input_qty').value * document.querySelector('#input_harga').value;
+	const count = counting(parseInt(qty), parseInt(e.target.value));
+
+	amount.value = count;
+}
+
+const changeQty = (e) => {
+	const id = e.target.id.split("-")[1];
+
+	const price = document.getElementById("harga-" + id).value;
+	const amount = document.getElementById("total_harga_barang-" + id);
+
+	const count = counting(parseInt(price), parseInt(e.target.value));
+
+	amount.value = count;
+}
+
+
+document.addEventListener("keyup", (e) => {
+
+	const grandTotalPrice = document.getElementById('grandPrice');
+	const price = document.querySelectorAll('.total_harga_barang');
+
+	let grandTotal = 0;
+	for (let i = 0; i < price.length; i++) {
+
+		grandTotal += parseInt(price[i].value);
+	}
+
+	grandTotalPrice.value = grandTotal;
+
+})
+
+// Masukkan Barang kedalam database
+$('#tambahBarang').click(function () {
+	$.ajax({
+		url: "<?= base_url('transasksi/tambahTransaksi') ?>",
+		type: "post",
+		data: $('#form_tambah_barang').serialize(),
+		success: function (data) {
+			document.location.href = "<?= base_url('transaksi') ?>"
+		}
 	});
-
-	$('.form-group').on('input', '.total_harga_barang', function () {
-		var totalSum = 0;
-		$('.form-group .total_harga_barang').each(function () {
-			var inputVal = $(this).val();
-			if ($.isNumeric(inputVal)) {
-				totalSum += parseFloat(inputVal);
-			}
-		});
-
-
-		var totalHarga = totalSum
-		$('.total_harga').val(totalHarga);
-	});
-
-
-
-	// Masukkan Barang kedalam database
-	$('#tambahBarang').click(function () {
-		$.ajax({
-			url: "<?= base_url('transasksi/tambahTransaksi') ?>",
-			type: "post",
-			data: $('#form_tambah_barang').serialize(),
-			success: function (data) {
-				document.location.href = "<?= base_url('transaksi') ?>"
-			}
-		});
-	});
-
-
 });
