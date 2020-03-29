@@ -5,38 +5,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Transaksi_model extends CI_Model {
 
   public function getAllTransaksi($keyword = null){
-    if($keyword) {
-      $query = "SELECT * FROM transaksi JOIN pelanggan ON pelanggan.id = transaksi.costumer_id WHERE no_faktur LIKE '%$keyword%' OR nama_pelanggan LIKE '%$keyword%'";
-    } else {
-      $query = "
-        SELECT `transaksi`.*, `pelanggan`.`nama_pelanggan`, `pelanggan`.`kode_pelanggan`
-        FROM `transaksi` JOIN `pelanggan`
-        ON `transaksi`.`costumer_id` = `pelanggan`.`id`
-      ";
+    if( $keyword ){
+      $this->db->like('no_faktur', $keyword);
+      $this->db->or_like('nama_pelanggan', $keyword);
+      $this->db->or_like('kode_pelanggan', $keyword);
+      $this->db->or_like('tanggal', $keyword);
     }
-    
-    return $this->db->query($query)->result_array();
+
+    $this->db->select("transaksi.*, pelanggan.nama_pelanggan, pelanggan.kode_pelanggan");
+    $this->db->join("pelanggan", "pelanggan.id = transaksi.costumer_id");
+    $query = $this->db->get("transaksi");
+    return $query->result_array();
 
   }
 
   public function getTransaksiById($id){
-    $query = "
-      SELECT `transaksi`.*, `pelanggan`.`nama_pelanggan`, `pelanggan`.`kode_pelanggan`, `pelanggan`.`telp`
-      FROM `transaksi` JOIN `pelanggan`
-      ON `transaksi`.`costumer_id` = `pelanggan`.`id`
-      WHERE `transaksi`.`id` = $id
-    ";
-    return $this->db->query($query)->row_array();
+    $this->db->select("transaksi.*, pelanggan.nama_pelanggan, pelanggan.kode_pelanggan, pelanggan.telp");
+    $this->db->join("pelanggan", "pelanggan.id = transaksi.costumer_id");
+    $this->db->where("transaksi.id", $id);
+    $query = $this->db->get("transaksi");
+    return $query->row_array();
     
   }
 
   public function getDetailTransaksi($id){
-    $query = "
-      SELECT * FROM `transaksi_produk` WHERE `transaksi_id` = $id
-    ";
+    $this->db->select("id, transaksi_id, barang, qty, satuan, harga, total_harga");
+    $this->db->where("transaksi_id", $id);
+    $query = $this->db->get("transaksi_produk");  
+    return $query->result_array();
     
-    $nani = $this->db->query($query)->result_array();
-    return $nani;
   }
 
   public function tambahTransaksi(){
@@ -48,6 +45,7 @@ class Transaksi_model extends CI_Model {
     $getFaktur = $this->db->get("transaksi")->row();
     $faktur = $getFaktur->no_faktur;
 
+    $tanggal = $this->input->post('tanggal');
     $no_faktur = $faktur + 1;
     $barang = $this->input->post('barang');
     $qty = $this->input->post('qty');
@@ -59,18 +57,26 @@ class Transaksi_model extends CI_Model {
     $satuan = $this->input->post("satuan");
     $totalhargabarang = $this->input->post('total_harga_barang');
     $keterangan = $this->input->post('keterangan');
-    $tanggal = time();
+    
     $no_acc = $this->input->post('no_acc');
+
+    $total_yang_dibayar = 0;
+    if($diskon == 0){
+      $total_yang_dibayar = $total;
+    } else{ 
+      $total_yang_dibayar = $total - $diskon;
+    }
     
 
     // Data Transaksi -> Database
     $data = [
+      'tanggal' => $this->input->post('tanggal'),
       'no_faktur' => $no_faktur,
       'costumer_id' => $pelanggan_id,
       'total' => $total,
       'uang_masuk' => $uang_masuk,
       'diskon' => $diskon,
-      'tanggal' => $tanggal,
+      'total_yang_dibayar' => $total_yang_dibayar,
       'no_acc' => $no_acc,
       'created_by' => $data['user']['nama']
     ];
@@ -79,6 +85,12 @@ class Transaksi_model extends CI_Model {
 
     $transaksi_id = $this->db->insert_id();
 
+    $data_history_pembayaran = [
+      'id_transaksi' => $transaksi_id,
+      'history_pembayaran' => $uang_masuk
+    ];
+    
+    $this->db->insert('history_pembayaran', $data_history_pembayaran);
 
     // Data Transaksi Produk -> Database
     for($i=0; $i<sizeof($barang); $i++){
@@ -107,51 +119,50 @@ class Transaksi_model extends CI_Model {
     }
     
     // DAta Kas -> Database
-    $data_kas = array(
+    $data_kas = [
       'tanggal' => $tanggal,
       'id_pelanggan' => $pelanggan_id,
       'no_reff' => $no_faktur,
       'keterangan' => $keterangan,
       'no_acc' => $no_acc,
-      'jumlah' => $total,
+      'jumlah' => $total_yang_dibayar,
       'masuk' => $uang_masuk,
       'saldo' => $saldo
-      
+    ];
+
+    $this->db->insert('laporan_kas_harian', $data_kas);
+    
+    $debet = $total_yang_dibayar - $uang_masuk;
+    
+    $this->db->select("saldo");
+    $this->db->order_by("id", "desc");
+    $this->db->limit(1);
+    $piutang_saldo = $this->db->get("piutang")->row();
+    if($piutang_saldo->saldo == 0){
+      $saldo_piutang = $debet;
+    } else {
+      $saldo_piutang = $piutang_saldo->saldo + $debet;
+    }
+
+    $data_piutang = array(
+      'no_acc' => $no_acc,
+      'tanggal' => $tanggal,
+      'id_pelanggan' => $pelanggan_id,
+      'no_reff' => $no_faktur,
+      'keterangan' => $keterangan,
+      'debet' => $debet,
+      'kredit' => 0,
+      'saldo' => $saldo_piutang
     );
 
-  $this->db->insert('laporan_kas_harian', $data_kas);
-  
-  $debet = $total - $uang_masuk;
-  
-  $this->db->select("saldo");
-  $this->db->order_by("id", "desc");
-  $this->db->limit(1);
-  $piutang_saldo = $this->db->get("piutang")->row();
-  if($piutang_saldo->saldo == 0){
-    $saldo_piutang = $debet;
-  } else {
-    $saldo_piutang = $piutang_saldo->saldo + $debet;
-  }
+    if($total - $uang_masuk > 0){
+      $this->db->insert('piutang', $data_piutang);
+    }
 
-  $data_piutang = array(
-    'no_acc' => $no_acc,
-    'tanggal' => $tanggal,
-    'id_pelanggan' => $pelanggan_id,
-    'no_reff' => $no_faktur,
-    'keterangan' => $keterangan,
-    'debet' => $debet,
-    'kredit' => 0,
-    'saldo' => $saldo_piutang
-  );
-
-  if($total - $uang_masuk > 0){
-    $this->db->insert('piutang', $data_piutang);
-  }
   }
 
   public function updateTransaksi(){
 
-    // Update Transaksi
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
     
     $no_acc = $this->input->post('no_acc');
@@ -160,7 +171,7 @@ class Transaksi_model extends CI_Model {
     $total = $this->input->post('total');
     $keterangan = $this->input->post('keterangan');
     $uang_masuk = $this->input->post('masukan');
-    $tanggal = time();
+    $tanggal = $this->input->post('tanggal');
 
     $this->db->select("uang_masuk");
     $this->db->where("id", $this->input->post('id'));
@@ -186,8 +197,6 @@ class Transaksi_model extends CI_Model {
     $this->db->where('id', $this->input->post('id'));
     $this->db->update('transaksi', $data);
 
-
-    // Tambah ke laporan kas harian
     $data_laporan = [
       'tanggal' => $tanggal,
       'no_acc' => $no_acc,
@@ -210,7 +219,7 @@ class Transaksi_model extends CI_Model {
     $piutang_saldo = $pengurangan_saldo_piutang->saldo - $kredit;
 
     $data_piutang = [
-      'no_acc' => $no_acc,
+      'no_acc' => $tanggal,
       'tanggal' => $tanggal,
       'id_pelanggan' => $pelanggan_id,
       'keterangan' => $keterangan,
@@ -220,7 +229,7 @@ class Transaksi_model extends CI_Model {
     ];
 
     $this->db->insert('piutang', $data_piutang);
-
   }
+
 
 }

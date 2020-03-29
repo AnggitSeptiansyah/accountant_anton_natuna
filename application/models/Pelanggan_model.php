@@ -11,6 +11,10 @@ class Pelanggan_model extends CI_Model {
     return $this->db->query($query)->result_array();
   }
 
+  public function countAllPelanggan() {
+    return $this->db->get('pelanggan')->num_rows();
+  }
+
   public function tambahPelanggan(){
     $data = [
       'kode_pelanggan' => $this->input->post('kode_pelanggan'),

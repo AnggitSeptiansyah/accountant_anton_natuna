@@ -5,14 +5,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin_model extends CI_Model {
 
   public function getAllAdmin(){
-    $query = "
-      SELECT `admin`.*, `jabatan_admin`.`nama_jabatan`
-      FROM `admin` JOIN `jabatan_admin`
-      ON `admin`.`jabatan_id` = `jabatan_admin`.`id`
-    ";
-
-    return $this->db->query($query)->result_array();
+    $this->db->select("admin.*, cabang_kantor.nama_cabang, jabatan_admin.nama_jabatan");
+    $this->db->join("cabang_kantor", "cabang_kantor.id = admin.kantor_id");
+    $this->db->join("jabatan_admin", "jabatan_admin.id = admin.jabatan_id");
+    $query = $this->db->get("admin");
+    return $query->result_array();
   }
+
+  public function getAllJabatanAdmin(){
+    $this->db->select("id, nama_jabatan");
+    $query = $this->db->get("jabatan_admin");
+    return $query->result_array();
+  }
+
+  public function getAllDataKantor(){
+    $this->db->select("id, nama_cabang");
+    $query = $this->db->get("cabang_kantor");
+    return $query->result_array();
+  }
+
 
   public function tambahAdmin(){
     $data = [
@@ -20,6 +31,7 @@ class Admin_model extends CI_Model {
       'email' => $this->input->post('email'),
       'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
       'jabatan_id' => $this->input->post('jabatan_id'),
+      'kantor_id' => $this->input->post('kantor_id'),
       'img' => "default.png",
       'date_created' => time(),
     ];

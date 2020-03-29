@@ -30,7 +30,7 @@
                       </div>
                     </div>
                   </div>
-              </div>
+				</div>
 
               <button type="submit" class="btn btn-primary">Ubah Profile</button>
                 

@@ -15,6 +15,19 @@ class Pelanggan extends CI_Controller {
     $data['judul'] = 'Data Pelanggan';
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
+    $this->load->library('pagination');
+
+    $config['base_url'] = 'http://localhost/keuangan_anton_natuna/pelanggan/index';
+    $config['total_rows'] = $this->pelanggan->countAllPelanggan();
+    $config['per_page'] = 10;
+    $config['num-links'] = 3;
+
+    // $data['total_rows'] = $config['total_rows'];
+
+    // Initialize
+    $data['start'] = $this->uri->segment(3);
+    $this->pagination->initialize($config);
+
     
     if($this->input->post('submit')){
       $data['keyword'] = $this->input->post('keyword');
@@ -23,7 +36,7 @@ class Pelanggan extends CI_Controller {
       $data['keyword'] = $this->session->set_userdata('keyword');
     }
     
-    $data['pelanggan'] = $this->pelanggan->getAllPelanggan($data['keyword']);
+    $data['pelanggan'] = $this->pelanggan->getAllPelanggan($config['per_page'], $data['start'], $data['keyword']);
     
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar');
@@ -37,7 +50,7 @@ class Pelanggan extends CI_Controller {
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
     $this->form_validation->set_rules('kode_pelanggan', 'Kode Pelanggan', 'required|trim|is_unique[pelanggan.kode_pelanggan]');
-    $this->form_validation->set_rules('nama', 'Nama Pelanggan', 'required|trim');
+    $this->form_validation->set_rules('nama', 'Nama Pelanggan', 'required|trim|is_unique[pelanggan.nama_pelanggan]');
     $this->form_validation->set_rules('alamat', 'Alamat', 'trim');
     $this->form_validation->set_rules('telepon', 'Telepon', 'trim');
     
@@ -50,7 +63,7 @@ class Pelanggan extends CI_Controller {
     } else {
       $this->pelanggan->tambahPelanggan();
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data pelanggan berhasil ditambah</div>');
-      redirect('pelanggan');
+      redirect('transaksi/tambahTransaksi');
     }
   }
 

@@ -22,10 +22,11 @@ class Piutang extends CI_Controller {
   }
 
   public function tambah_data_piutang(){
+    $data['judul'] = 'Piutang';
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
     if($this->form_validation->run() == false){
-      $data['judul'] = 'Piutang';
-      $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
+      
 
       $this->load->view('templates/header', $data);
       $this->load->view('templates/sidebar', $data);

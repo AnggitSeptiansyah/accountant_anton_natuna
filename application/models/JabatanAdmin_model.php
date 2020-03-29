@@ -9,6 +9,8 @@ class JabatanAdmin_model extends CI_Model {
     return $this->db->query($query)->result_array();
   }
 
+  
+
   public function getJabatanById($id){
     $query = $this->db->get_where('jabatan_admin', ['id' => $id]);
     return $query->row_array();

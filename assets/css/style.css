@@ -35,3 +35,24 @@
   color: #000;
   font-family: Arial;
 }
+
+.tanggal {
+  float: right;
+  text-align: right;
+}
+
+.laporan_pelanggan{
+  color: rgb(240, 12, 12) !important;
+  font-weight: 500;
+}
+
+.surat-jalan-title {
+  font-weight: 400;
+  font-size: 18pt;
+  
+}
+
+.bottom {
+  border-bottom: 2px solid #000;
+  margin-top: 8px;
+}

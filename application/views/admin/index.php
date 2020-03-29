@@ -14,6 +14,7 @@
                     <th>Nama Admin</th>
                     <th>Email</th>
                     <th>Jabatan</th>
+                    <th>Kantor</th>
                     <th>Date Created</th>
                   </tr>
                 </thead>
@@ -26,6 +27,7 @@
                       <td><?= $admin['nama'] ?></td>
                       <td><?= $admin['email'] ?></td>
                       <td><?= $admin['nama_jabatan'] ?></td>
+                      <td><?= $admin['nama_cabang'] ?></td>
                       <td><?= date('d F Y', $admin['date_created']) ?></td>
                     </tr>
                     <?php $i++ ?>

@@ -14,6 +14,7 @@ class Worksheet_model extends CI_Model{
     $data = [
       'kode' => $this->input->post('kode'),
       'nama_jenis' => $this->input->post('jenis_worksheet'),
+      
     ];
 
     $this->db->insert('jenis_worksheet', $data);
@@ -23,11 +24,13 @@ class Worksheet_model extends CI_Model{
     $jenis_biaya = $this->input->post('kode');
     $keterangan = $this->input->post('keterangan');
     $jumlah = $this->input->post('jumlah');
+    $tanggal = $this->input->post('tanggal');
 
     $data = [
       'jenis_biaya' => $jenis_biaya,
       'keterangan' => $keterangan,
-      'jumlah' => $jumlah
+      'jumlah' => $jumlah,
+      'tanggal' => $tanggal
     ];
 
     $this->db->insert('worksheet', $data);
@@ -39,7 +42,7 @@ class Worksheet_model extends CI_Model{
     $saldo_kas = $laporan_kas->saldo - $jumlah;
     
     $data_laporan = [
-      'tanggal' => time(),
+      'tanggal' => $tanggal,
       'keterangan' => $keterangan,
       'no_acc' => $jenis_biaya,
       'jumlah' => $jumlah,

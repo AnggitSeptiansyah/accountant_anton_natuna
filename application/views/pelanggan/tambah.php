@@ -9,20 +9,24 @@
             <div class="card-body">
               <form action="" method="post">
               <div class="form-group">
-                  <label for="exampleInputEmail1">Kode Pelanggan</label>
+                  <label for="">Kode Pelanggan</label>
                   <input type="text" class="form-control" placeholder="Masukkan Kode Pelanggan" name="kode_pelanggan">
+                  <small class="form-text text-danger"><?= form_error('kode_pelanggan') ?></small>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Nama Pelanggan</label>
+                  <label for="">Nama Pelanggan</label>
                   <input type="text" class="form-control" placeholder="Masukkan Nama Pelanggan" name="nama">
+                  <small class="form-text text-danger"><?= form_error('nama') ?></small>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Alamat</label>
+                  <label for="">Alamat</label>
                   <input type="text" class="form-control" placeholder="Masukkan Alamat Pelanggan" name="alamat">
+                  <small class="form-text text-danger"><?= form_error('alamat') ?></small>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Telepon</label>
+                  <label for="">Telepon</label>
                   <input type="text" class="form-control" placeholder="Masukkan nomor Telepon / HP / WA" name="telepon">
+                  <small class="form-text text-danger"><?= form_error('telepon') ?></small>
                 </div>
                 <button class="btn btn-primary" type='submit'>Tambah Pelanggan</button>
               </form>

@@ -22,21 +22,40 @@
   <style>
     *{
       color: #000 !important;
+      font-family: "Narrow Arial", sans-serif;
+      font-size: 13pt;
+      font-weight: 
     }
+
+    .identity {
+      font-size: 18pt;
+      font-weight: 400;
+    }
+
+    tbody{
+      border-bottom: 1px solid #000 !important;
+      border-right: none !important;
+      border-left: none !important
+    }
+
 
     table th{
       border: 1px solid #000 !important;
       border-right: 1px solid #000 !important;
       border-left: 1px solid #000 !important;
-      
-
+      font-weight: 400;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 13pt;
     }
 
-    table td{
-      border-bottom: 1px solid #000 !important;
+    tbody td{
+      border: none !important;
       border-right: 1px solid #000 !important;
       border-left: 1px solid #000 !important;
-
+      line-height: 10px;
+      height: 10px;
+      font-size: 13pt;
     }
 
     .surat{
@@ -45,6 +64,29 @@
     
     .margin-top{
       margin-top: 110px;
+    }
+
+    .no_faktur {
+      font-weight: 500;
+    }
+
+    .capitalize {
+      text-transform: capitalize;
+    }
+
+    .table-one {
+      width: 50px;
+      text-align: right
+    }
+
+    .table-three {
+      width: 100px;
+      text-align: center;
+    }
+
+    .table-four {
+      width: 100px;
+      text-align: center;
     }
   </style>
 </head>
@@ -60,53 +102,44 @@
           <!-- Page Heading -->
           
             <div class="row">
-              <div class="col-md-5 ml-2 mt-2">
+              <div class="col-md-4">
                 <div class="identity">
-                    <img src="<?= base_url('assets/img/logo-an.png') ?>" alt="">
-                  </div>
-                <div class="mt-2 ml-3">
-                  
-                  <h5 class="mt-5 surat">Surat Jalan / Terima</h5>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <p>No. SJ</p>
-                      <p>Tanggal</p>
-                    </div>
-                    <div class="col-md-4">
-                      <p><?= $transaksi['no_faktur'] ?></p>
-                      <p><?= date('d F Y', $transaksi['tanggal']) ?></p>
-                    </div>
-                  </div>
+                    CV. ANTON NATUNA
                 </div>
               </div>
 
-              <div class="col-md-4 margin-top">
-                <p>Kepada, Yth : <?= $transaksi['nama_pelanggan'] ?></p>
-                <hr>
+              <div class="col-md-4 text-center mt-4">
+                <h1 class="surat-jalan-title">Surat Jalan / Tanda Terima</h1> 
+                <p>No. <span class="no_faktur"><?= $transaksi['no_faktur'] ?></span></p>
               </div>
+
+              <div class="col-md-4 float-right tanggal">
+                <p>Tanggal : <?= date("d-m-Y", strtotime($transaksi['tanggal'])) ?></p>
+                <p>Kepada, Yth : <?= $transaksi['nama_pelanggan'] ?></p>                
+              </div>
+
             </div>
             
-            <div class="card-body margin-card">
-            <p>Dengan hormat</p>
+            <p>Dengan hormat , </p>
             <p>Mohon diterima barang tersebut dibawah ini</p>
-              <table class="table table-bordered table-hovered mt-3">
+              <table class="table">
                 <thead>
-                  
                   <tr>
                     <th>No</th>
                     <th>Nama Barang</th>
                     <th>Banyak</th>
+                    <th>Satuan</th>
                     <th>Keterangan</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php $i = 1 ?>
                   <?php foreach($transaksi_produk as $transaksi_produk) : ?>
-                  
                   <tr>
-                    <td><?= $i ?></td>
+                    <td class="table-one"><?= $i ?></td>
                     <td><?= $transaksi_produk['barang'] ?></td>
-                    <td><?= $transaksi_produk['qty'] ?></td>
+                    <td class="table-three"><?= $transaksi_produk['qty'] ?></td>
+                    <td class="table-four"><div class="capitalize"><?= $transaksi_produk['satuan'] ?></div></td>
                     <td></td>
                   </tr>
                   <?php $i++ ?>
@@ -114,22 +147,21 @@
                 </tbody>
               </table>
               <div class="row">
-                <div class="col-md-4 text-center">                
-                  <p class="mb-5">Mengetahui</p>
-                  <p>(<span class="tanda-tangan"></span>)</p>
-                </div>
                 <div class="col-md-4 text-center">
                   <p class="mb-5">Yang Menyerahkan</p>
                   <p>(<span class="tanda-tangan"></span>)</p>
                 </div>
+                <div class="col-md-4 text-center">                
+                  <p class="mb-5">Mengetahui</p>
+                  <p>(<span class="tanda-tangan"></span>)</p>
+                </div>
+                
                 <div class="col-md-4 text-center">
                   <p class="mb-5">Penerima</p>
                   <p>(<span class="tanda-tangan"></span>)</p>
                 </div>
               </div>
             </div>
-          
-          
         </div>
         <!-- /.container-fluid -->
       </div>

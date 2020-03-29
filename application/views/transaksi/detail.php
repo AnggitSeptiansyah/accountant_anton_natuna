@@ -5,7 +5,7 @@
           <div class="card">
             <div class="row">
               <div class="col-md-5 ml-3 mt-2">
-                <p>Pekanbaru, <?= date('d F Y', $transaksi['tanggal']) ?></p>
+                <p>Pekanbaru, <?= date('d-m-Y', strtotime($transaksi['tanggal'])) ?></p>
                 <p>Kepada Yth,&nbsp;&nbsp;&nbsp;<?= $transaksi['nama_pelanggan'] ?></p>
                 <hr>
               </div>

@@ -78,6 +78,12 @@
     <span>Profile</span></a>
 </li>
 
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('CabangKantor') ?>">
+    <i class="fas fa-fw fa-office"></i>
+    <span>Kantor</span></a>
+</li>
+
 <hr class="sidebar-divider mt-3">
 
 <!-- Heading -->
@@ -123,7 +129,7 @@
 <hr class="sidebar-divider mt-3">
 
 <div class="sidebar-heading">
-  Laporan
+  Laporan Kas Harian
 </div>
 
 <li class="nav-item">
@@ -167,10 +173,29 @@
 </li>
 
 <li class="nav-item">
-  <a class="nav-link pb-0" href="<?= base_url('piutang') ?>">
-    <i class="fas fa-fw fa-info"></i>
-    <span>Utang</span></a>
-</li> 
+  <a class="nav-link pb-0" href="<?= base_url('worksheet') ?>">
+    <i class="fas fa-fw fa-doc"></i>
+    <span>Inventaris</span></a>
+</li>
+
+<hr class="sidebar-divider mt-3">
+
+<div class="sidebar-heading">
+  Laporan Bank
+</div>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('worksheet') ?>">
+    <i class="fas fa-fw fa-doc"></i>
+    <span>Laporan Bank Harian</span></a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link pb-0" href="<?= base_url('worksheet') ?>">
+    <i class="fas fa-fw fa-doc"></i>
+    <span></span></a>
+</li>
+
 
 
 

@@ -28,27 +28,34 @@
                     <th>No Acc</th>
                     <th>No Faktur</th>
                     <th>Pelanggan</th>
-                    <th>Total</th>
+                    <th>Total Pembayaran</th>
                     <th>Uang Masuk</th>
-                    <th>Dibuat oleh</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                     <?php $i = 1 ?>
                     <?php foreach($transaksi as $transaksi) : ?>
+                      <?php 
+                      if($transaksi['total'] - $transaksi['uang_masuk'] == 0 ) {
+                        $status = "Lunas";
+                      } else {
+                        $status = "Belum Lunas";
+                      }
+                    ?>
                     <tr>
                       <th><?= $i ?></th>
-                      <td><?= date('d-m-Y', $transaksi['tanggal']) ?></td>
+                      <td><?= $transaksi['tanggal'] ?></td>
                       <td><?= $transaksi['no_acc'] ?></td>
                       <td><?= $transaksi['no_faktur'] ?></td>
                       <td><?= $transaksi['kode_pelanggan'] ?> - <?= $transaksi['nama_pelanggan'] ?></td>
-                      <td>Rp. <?= number_format($transaksi['total']) ?></td>
+                      <td>Rp. <?= number_format($transaksi['total_yang_dibayar']) ?></td>
                       <td>Rp. <?= number_format($transaksi['uang_masuk']) ?></td>
-                      <td><?= $transaksi['created_by'] ?></td>
+                      <td><?= $status ?></td>
                       <td>
                         <a class="badge badge-danger" href="<?= base_url('') ?>transaksi/update/<?= $transaksi['id'] ?>">Pembayaran</a>
-                        <a class="badge badge-dark" href="<?= base_url('') ?>transaksi/detail/<?= $transaksi['id'] ?>">invoice</a>
+                        <a class="badge badge-dark" href="<?= base_url('') ?>transaksi/invoice/<?= $transaksi['id'] ?>">invoice</a>
                         <a class="badge badge-success" href="<?= base_url('') ?>transaksi/surat_jalan/<?= $transaksi['id'] ?>">Surat Jalan</a>
                       </td>
                     </tr>

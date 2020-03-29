@@ -98,7 +98,7 @@
       margin-left: 100px;
       color: #000;
       margin-bottom: 7rem;
-      margin-top: -8rem;
+      margin-top: -5rem;
     }
 
     .pinggir {
@@ -142,7 +142,7 @@
         <h5 class="no_faktur">No. <?= $transaksi['no_faktur'] ?></h5>
       </div>
       <div class="col-md-3 mt-2 kepada-style">
-        <p>Pekanbaru, <?= date('d F Y', $transaksi['tanggal']) ?></p>
+        <p>Pekanbaru, <?= $transaksi['tanggal'] ?></p>
         <p>Kepada Yth,&nbsp;&nbsp;&nbsp;<span class="nama"><?= $transaksi['nama_pelanggan'] ?></span></p>
         <p>Telp / HP &nbsp;&nbsp;&nbsp;<?= $transaksi['telp'] ?></p>
       </div>
@@ -167,7 +167,7 @@
           <td style="width: 500px"><?= $transaksi_produk['barang'] ?></td>
           <td class="pinggir" style="width: 50px;"><?= $transaksi_produk['qty'] ?></td>
           <td style="width: 50px;"><?= $transaksi_produk['satuan'] ?></td>
-          <td class="pinggir" style="width: 135px"><?= $transaksi_produk['harga'] ?></td>
+          <td class="pinggir" style="width: 135px"><?= number_format($transaksi_produk['harga']) ?></td>
           <td class="pinggir"><?= number_format($transaksi_produk['total_harga']) ?></td>
         </tr> 
         <?php $i++ ?>
@@ -179,21 +179,12 @@
           <td>Rp. <div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format($transaksi['total']) ?></div></td>
         </tr>
         <tr>
-          <td colspan=5><span class="invoice">Diskon</td>
-          <td>Rp <div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format($transaksi['diskon']) ?></div></td>
-        </tr>
-        <tr>
-          <?php $transaksi['total'] - $transaksi['diskon'] ?>
-          <td colspan=5><span class="invoice">Total yang Dibayar</td>
-          <td>Rp <div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format() ?></div></td>
-        </tr>
-        <tr>
-          <td colspan=5><span class="invoice">Panjar</td>
+          <td colspan=5><span class="invoice">Pembayaran</td>
           <td class="borbot">Rp. <div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format($transaksi['uang_masuk']) ?></div></td>
         </tr>
         <tr>
-          <td colspan=5><span class="invoice">Total Sisa</td>
-          <td>Rp.<div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format($transaksi['total'] - $transaksi['uang_masuk']) ?></div></td>
+          <td colspan=5><span class="invoice">Sisa</td>
+          <td>Rp.<div class="tulisan-kanan" style="text-align: right; float-right"><?= number_format($transaksi['total_yang_dibayar'] - $transaksi['uang_masuk']) ?></div></td>
         </tr>
       </tfoot>
       
@@ -203,7 +194,7 @@
     </div>
     <div class="row">
       <div class="col-md-4 text-center">
-        <p class="mb-5">Diterima Oleh</p>
+        <p class="mb-5">Pemesan</p>
         <p>________________</p>
       </div>
       <div class="col-md-6 text-center">

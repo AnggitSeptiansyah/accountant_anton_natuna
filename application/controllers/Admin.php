@@ -20,7 +20,6 @@ class Admin extends CI_Controller {
     $this->load->view('templates/topbar', $data);
     $this->load->view('admin/index', $data);
     $this->load->view('templates/footer');
-    
   }
 
   public function tambah(){
@@ -29,8 +28,9 @@ class Admin extends CI_Controller {
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
     $data['admin'] = $this->admin->getAllAdmin();
-    $data['jabatanAdmin'] = $this->db->get('jabatan_admin')->result_array();
-
+    $data['jabatanAdmin'] = $this->admin->getAllJabatanAdmin();
+    $data['kantor'] = $this->admin->getAllDataKantor();
+    
     $this->form_validation->set_rules('nama', 'Nama User', 'required|trim');
     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
     $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]');

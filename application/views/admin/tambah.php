@@ -21,6 +21,14 @@
                   </select>
                 </div>
                 <div class="form-group">
+                  <label for="exampleInputPassword1">Kantor</label>
+                  <select name="kantor_id" id="" class="form-control">
+                    <?php foreach($kantor as $kantor) : ?>
+                      <option value="<?= $kantor['id'] ?>"><?= $kantor['nama_cabang']; ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                </div>
+                <div class="form-group">
                   <label for="">Email address</label>
                   <input type="email" class="form-control" placeholder="Enter email" name="email">
                 </div>

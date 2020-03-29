@@ -9,6 +9,13 @@
             <div class="card-body">
               <form action="" method="post">
                 <input type="hidden" name="id" value="<?= $transaksi['id'] ?>">
+
+                <div class="form-group">
+                  <label for="">Tanggal</label>
+                  <input type="date" class="form-control col-md-3" name="tanggal" placeholder="Masukkan no acc" value="<?= $transaksi['tanggal'] ?>" readonly>
+                  <small class="form-text text-danger"><?= form_error('tanggal') ?></small>
+                </div>
+
                 <div class="form-group">
                   <label for="">No Account</label>
                   <input type="text" class="form-control" name="no_acc" placeholder="Masukkan no acc" value="<?= $transaksi['no_acc'] ?>" readonly>
@@ -32,9 +39,10 @@
                   <input type="text" name="no_faktur" placeholder="Masukkan No Faktur" class="form-control" value="<?= $transaksi['no_faktur'] ?>" readonly>
                   <small class="form-text text-danger"><?= form_error('no_faktur') ?></small>
                 </div>
+
                 <div class="form-group">
-                  <label for="">Total Harga</label>
-                  <input type="text" class="form-control" name="total" placeholder="Masukkan Total Harga" value="<?= $transaksi['total'] ?>" readonly>
+                  <label for="">Total Pembayaran</label>
+                  <input type="text" class="form-control" name="total" placeholder="Masukkan Total Harga" value="<?= $transaksi['total_yang_dibayar'] ?>" readonly>
                   <small class="form-text text-danger"><?= form_error('total') ?></small>
                 </div>
 

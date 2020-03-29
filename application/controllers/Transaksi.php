@@ -99,7 +99,7 @@ class Transaksi extends CI_Controller {
 
     $data['pelanggan'] = $this->db->get('pelanggan')->result_array();
     $data['transaksi'] = $this->db->get_where('transaksi', ['id' => $id])->row_array();
-
+    
     $this->form_validation->set_rules('no_acc', 'No Account', 'required|trim');
     $this->form_validation->set_rules('no_faktur', 'No Faktur', 'required|trim');
     $this->form_validation->set_rules('total', 'Total Harga', 'required|numeric|trim');
@@ -119,6 +119,5 @@ class Transaksi extends CI_Controller {
     }
   }
 
-  
   
 }

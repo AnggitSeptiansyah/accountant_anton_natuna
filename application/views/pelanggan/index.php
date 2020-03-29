@@ -36,7 +36,7 @@
                     <?php $i = 1 ?>
                     <?php foreach($pelanggan as $pelanggan) : ?>
                     <tr>
-                      <th><?= $i ?></th>
+                      <th><?= ++$start ?></th>
                       <td><?= $pelanggan['kode_pelanggan'] ?></td>
                       <td><?= $pelanggan['nama_pelanggan'] ?></td>
                       <td><?= $pelanggan['alamat'] ?></td>
@@ -51,6 +51,7 @@
                     <?php endforeach ; ?>
                 </tbody>
               </table>
+              <?= $this->pagination->create_links(); ?>
             </div>
           </div>
         </div>

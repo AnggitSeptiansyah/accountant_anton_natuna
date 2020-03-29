@@ -9,6 +9,10 @@
             <div class="card-body">
               <form action="" method="post">
                 <div class="form-group">
+                  <label for="">Tanggal</label>
+                  <input type="date" class="form-control col-md-3" placeholder="Masukkan Keterangan" name="tanggal">
+                </div>
+                <div class="form-group">
                   <label for="">Kode</label>
                   <select name="kode" id="" class="form-control">
                     <?php foreach($kode as $kode) : ?>

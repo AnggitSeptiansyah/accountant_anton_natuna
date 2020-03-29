@@ -40,18 +40,29 @@
                     <tr>
                       <th>No</th>
                       <th>No Faktur</th>
+                      <th>Total</th>
                       <th>Uang Masuk</th>
-                      <th>Tanggal</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>                    
                     <?php $i = 1 ?>
                     <?php foreach($transaksi_pelanggan as $transaksi_pelanggan) : ?>
+                    <?php $status = ''; ?>
+                    <?php 
+                      if($transaksi_pelanggan['total'] - $transaksi_pelanggan['uang_masuk'] == 0 ) {
+                        $status = "Lunas";
+                      } else {
+                        $status = "Belum Lunas";
+                      }
+                    ?>
+
                     <tr>
                       <td><?= $i++ ?></td>
                       <td><?= $transaksi_pelanggan['no_faktur'] ?></td>
                       <td><?= $transaksi_pelanggan['total'] ?></td>
                       <td><?= $transaksi_pelanggan['uang_masuk'] ?></td>
+                      <td><?= $status ?></td>
                     </tr>
                     <?php $i++ ?>
                     <?php endforeach ; ?>

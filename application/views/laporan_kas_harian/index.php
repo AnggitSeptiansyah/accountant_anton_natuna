@@ -38,10 +38,10 @@
                   <?php foreach($laporan as $laporan) : ?>
                   <tr>
                     <td><?= $i ?></td>
-                    <td><?= date('d-m-Y',$laporan['tanggal']) ?></td>
-                    <td><?= $laporan['kode_pelanggan'] ?> - <?= $laporan['nama_pelanggan'] ?></td>
+                    <td><?= $laporan['tanggal'] ?></td>
+                    <td><?= $laporan['kode_pelanggan'] ?></td>
                     <td><?= $laporan['no_reff'] ?></td>
-                    <td><?= $laporan['keterangan'] ?></td>
+                    <td><?= $laporan['keterangan'] ?> <span class="laporan_pelanggan">[<?= $laporan['nama_pelanggan'] ?>]</span></td>
                     <td><?= $laporan['no_acc'] ?></td>
                     <td><?= number_format($laporan['masuk']) ?></td>
                     <td><?= number_format($laporan['keluar']) ?></td>
