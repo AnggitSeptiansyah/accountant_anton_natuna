@@ -12,7 +12,18 @@ class Piutang extends CI_Controller {
     $data['judul'] = 'Piutang';
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
-    $data['piutang'] = $this->piutang->getAllPiutang();
+    $this->load->library('pagination');
+
+    $config['base_url'] = base_url() . 'Piutang/index';
+    $config['total_rows'] = $this->piutang->countAllPiutang();
+    $config['per_page'] = 10;
+    $config['num-links'] = 3;
+
+    // Initialize
+    $data['start'] = $this->uri->segment(3);
+    $this->pagination->initialize($config);
+
+    $data['piutang'] = $this->piutang->getAllPiutang($config['per_page'], $data['start']);
 
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar', $data);

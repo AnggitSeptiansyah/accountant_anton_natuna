@@ -22,13 +22,13 @@
   <style>
     *{
       color: #000;
-      font-family: "Arial Narrow";
-      font-size: 14pt;      
+      font-family: sans-serif;
+      font-size: 15pt;      
     }
 
     .identity{
       font-weight: 400;
-      font-size: 16pt;
+      font-size: 18pt;
     }
 
     
@@ -39,7 +39,7 @@
       border-left: 1px solid #000 !important;
       text-transform: uppercase;
       line-height: 25px;
-      font-size: 13pt;
+      font-size: 16pt;
       font-weight: 400;
       text-align: center;
     }
@@ -54,16 +54,16 @@
       border: none !important;
       border-right: 1px solid #000 !important;
       border-left: 1px solid #000 !important;
-      line-height: 0;
-      height: 0;
-      font-size: 13pt;
-      
+      line-height: 10px;
+      height: 10px;
+      font-size: 15pt;
+      text-transform: capitalize;
     }
 
     tfoot td{
       line-height: 5px;
       height: 5px;
-      font-size: 13pt;
+      font-size: 15pt;
       
     }
     
@@ -89,9 +89,6 @@
       border: 1px solid #000 !important;
     }
 
-    .table-font{
-      font-size: 16px;
-    }
 
     .kalimat-peringatan{
       width: 600px;
@@ -145,16 +142,17 @@
         <p>Pekanbaru, <?= $transaksi['tanggal'] ?></p>
         <p>Kepada Yth,&nbsp;&nbsp;&nbsp;<span class="nama"><?= $transaksi['nama_pelanggan'] ?></span></p>
         <p>Telp / HP &nbsp;&nbsp;&nbsp;<?= $transaksi['telp'] ?></p>
+        <p>_________________________________________________________</p>
       </div>
     </div>
 
-    <table class="table table-hovered mt-3">
+    <table class="table table-hovered mt-5">
       <thead>
         <tr>
           <th class="middle">No</th>
           <th class="middle">Keterangan</th>
           <th class="middle">Jumlah</th>
-          <th class="middle">Satuan</th>
+          <th class="middle ">Satuan</th>
           <th>@ <span class="capitalized">Rp.</span></th>
           <th class="middle">Jumlah Harga (Rp.)</th>
         </tr> 

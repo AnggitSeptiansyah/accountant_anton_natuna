@@ -23,7 +23,7 @@
     *{
       color: #000 !important;
       font-family: "Narrow Arial", sans-serif;
-      font-size: 13pt;
+      font-size: 15pt;
       font-weight: 
     }
 
@@ -46,7 +46,7 @@
       font-weight: 400;
       text-transform: uppercase;
       text-align: center;
-      font-size: 13pt;
+      font-size: 16pt;
     }
 
     tbody td{
@@ -55,7 +55,8 @@
       border-left: 1px solid #000 !important;
       line-height: 10px;
       height: 10px;
-      font-size: 13pt;
+      font-size: 15pt;
+      text-transform: capitalize;
     }
 
     .surat{
@@ -64,10 +65,6 @@
     
     .margin-top{
       margin-top: 110px;
-    }
-
-    .no_faktur {
-      font-weight: 500;
     }
 
     .capitalize {
@@ -87,6 +84,11 @@
     .table-four {
       width: 100px;
       text-align: center;
+    }
+
+    .right-side {
+      line-height: 10px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -110,12 +112,13 @@
 
               <div class="col-md-4 text-center mt-4">
                 <h1 class="surat-jalan-title">Surat Jalan / Tanda Terima</h1> 
-                <p>No. <span class="no_faktur"><?= $transaksi['no_faktur'] ?></span></p>
+                <h5 class="no_faktur">No. <?= $transaksi['no_faktur'] ?></h5>
               </div>
 
-              <div class="col-md-4 float-right tanggal">
+              <div class="col-md-4 right-side">
                 <p>Tanggal : <?= date("d-m-Y", strtotime($transaksi['tanggal'])) ?></p>
                 <p>Kepada, Yth : <?= $transaksi['nama_pelanggan'] ?></p>                
+                <p>______________________________________________________</p>
               </div>
 
             </div>

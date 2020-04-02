@@ -14,7 +14,28 @@ class Worksheet extends CI_Controller {
     $data['judul'] = 'Worksheet';
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
-    $data['worksheet'] = $this->worksheet->getAllWorksheet();
+    $this->load->library('pagination');
+
+    
+
+    $config['base_url'] = base_url() . 'Worksheet/index';
+    $config['total_rows'] = $this->worksheet->countAllWorksheet();
+    $config['per_page'] = 10;
+    $config['num-links'] = 3;
+
+    // Initialize
+    $data['start'] = $this->uri->segment(3);
+    $this->pagination->initialize($config);
+
+    if($this->input->post('submit')){
+      $data['keyword'] = $this->input->post('keyword');
+      $this->session->set_userdata('keyword', $data['keyword']); 
+    } else {
+      $data['keyword'] = $this->session->set_userdata('keyword');
+    }
+
+    $data['worksheet_each_day'] = $this->worksheet->getWorksheetEachDay();
+    $data['worksheet'] = $this->worksheet->getAllWorksheet($config['per_page'], $data['start'], $data['keyword']);
 
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar', $data);
@@ -48,11 +69,14 @@ class Worksheet extends CI_Controller {
   }
 
   public function tambah_biaya(){
+
+    $this->load->library('form_validation');
+
     $data['judul'] = 'Worksheet';
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
     $data['kode'] = $this->db->get('jenis_worksheet')->result_array();
 
-    $this->load->library('form_validation');
+    $data['jenis_pembayaran'] = $this->worksheet->getJenisPembayaran();
 
     $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
     $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|numeric');
@@ -70,6 +94,7 @@ class Worksheet extends CI_Controller {
       redirect('worksheet');
     }
   }
+
 
   
 

@@ -2,25 +2,38 @@
 
 class Pelanggan_model extends CI_Model {
  
-  public function getAllPelanggan($keyword = null){
+  public function getAllPelanggan($limit, $start, $keyword = null){
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
+    
     if($keyword){
-      $query = "SELECT * FROM pelanggan WHERE nama_pelanggan LIKE '%$keyword%' OR kode_pelanggan LIKE '%$keyword%'";
-    } else {
-      $query = "SELECT * FROM pelanggan";
+      $this->db->like('kode_pelanggan', $keyword);
+      $this->db->or_like('nama_pelanggan', $keyword);
+      $this->db->where("id_kantor", $data['user']['kantor_id']);
     }
-    return $this->db->query($query)->result_array();
+
+    $this->db->select("id, kode_pelanggan, nama_pelanggan, alamat, telp");
+    $this->db->where("id_kantor", $data['user']['kantor_id']);
+    $query = $this->db->get("pelanggan", $limit, $start);
+    return $query->result_array();  
   }
 
   public function countAllPelanggan() {
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
+
+    $this->db->where("id_kantor", $data['user']['kantor_id']);
     return $this->db->get('pelanggan')->num_rows();
   }
 
   public function tambahPelanggan(){
+
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
+
     $data = [
       'kode_pelanggan' => $this->input->post('kode_pelanggan'),
       'nama_pelanggan' => $this->input->post('nama'),
       'alamat' => $this->input->post('alamat'),
       'telp' => $this->input->post('telepon'),
+      'id_kantor' => $data['user']['kantor_id']
     ];
 
     $this->db->insert('pelanggan', $data);

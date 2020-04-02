@@ -11,9 +11,12 @@ class Auth extends CI_Controller {
 
   public function index(){
 
-    if ($this->session->userdata('email')){
-      redirect('dashboard');
-    }
+    
+      if ($this->session->userdata('email')){
+        redirect('admin/profile');
+      }
+    
+    
 
     $data['judul'] = 'Login';
 
@@ -38,12 +41,24 @@ class Auth extends CI_Controller {
     if($user){
       if(password_verify($password, $user['password'])){
         $data = [
+          'id' => $user['id'],
           'email' => $user['email'],
           'jabatan_id' => $user['jabatan_id'],
           'nama' => $user['nama'],
+          'kantor_id' => $user['kantor_id'],
         ];
         $this->session->set_userdata($data);
-        redirect('dashboard');
+        
+        if($user['jabatan_id'] == 7) {
+          redirect("admin/profile");
+        }  else if($user['jabatan_id'] == 8) {
+          redirect("dashboard");
+        } else if($user['jabatan_id'] == 9) {
+          redirect("dashboard");
+        }
+        else if($user['jabatan_id'] == 10){
+          redirect("dashboard");
+        }
       } else {
           $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password yang Anda Masukkan Salah</div>');
           redirect('auth');

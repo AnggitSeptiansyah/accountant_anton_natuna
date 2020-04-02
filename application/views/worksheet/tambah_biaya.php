@@ -9,10 +9,6 @@
             <div class="card-body">
               <form action="" method="post">
                 <div class="form-group">
-                  <label for="">Tanggal</label>
-                  <input type="date" class="form-control col-md-3" placeholder="Masukkan Keterangan" name="tanggal">
-                </div>
-                <div class="form-group">
                   <label for="">Kode</label>
                   <select name="kode" id="" class="form-control">
                     <?php foreach($kode as $kode) : ?>
@@ -20,6 +16,7 @@
                     <?php endforeach ?>
                   </select>
                 </div>
+                
                 <div class="form-group">
                   <label for="">Keterangan</label>
                   <input type="text" class="form-control" placeholder="Masukkan Keterangan" name="keterangan">
@@ -27,6 +24,14 @@
                 <div class="form-group">
                   <label for="">Jumlah</label>
                   <input type="text" class="form-control" placeholder="Masukkan Jenis Biaya" name="jumlah">
+                </div>
+                <div class="form-group">
+                  <label for="">Jenis Pembayaran</label>
+                  <select name="id_jenis_pembayaran" id="" class="form-control">
+                    <?php foreach ($jenis_pembayaran as $jenis_pembayaran) : ?>
+                      <option value="<?= $jenis_pembayaran['id'] ?>"><?= $jenis_pembayaran['nama_jenis_pembayaran'] ?></option>
+                    <?php endforeach ?>
+                  </select>
                 </div>
                 <button class="btn btn-primary" type='submit'>Tambah Jenis Worksheet</button>
               </form>

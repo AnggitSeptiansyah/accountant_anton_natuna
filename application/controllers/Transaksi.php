@@ -14,6 +14,16 @@ class Transaksi extends CI_Controller {
     $data['judul'] = 'Transaksi';
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
+    $this->load->library('pagination');
+
+    $config['base_url'] = base_url() . 'transaksi/index';
+    $config['total_rows'] = $this->transaksi->countAllTransaksi();
+    $config['per_page'] = 10;
+    $config['num-links'] = 3;
+
+    $data['start'] = $this->uri->segment(3);
+    $this->pagination->initialize($config);
+
     if($this->input->post('submit')){
       $data['keyword'] = $this->input->post('keyword');
       $this->session->set_userdata('keyword', $data['keyword']); 
@@ -21,7 +31,7 @@ class Transaksi extends CI_Controller {
       $data['keyword'] = $this->session->set_userdata('keyword');
     }
 
-    $data['transaksi'] = $this->transaksi->getAllTransaksi($data['keyword']);
+    $data['transaksi'] = $this->transaksi->getAllTransaksi($config['per_page'], $data['start'], $data['keyword']);
 
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar', $data);
@@ -71,7 +81,8 @@ class Transaksi extends CI_Controller {
     $data['judul'] = 'Tambah Transaksi';
     
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
-    $data['pelanggan'] = $this->db->query("SELECT id, kode_pelanggan, nama_pelanggan FROM pelanggan")->result_array();
+
+    $data['pelanggan'] = $this->transaksi->getDataPelanggan();
 
     $this->form_validation->set_rules('no_acc', 'No Account', 'required|trim');
     $this->form_validation->set_rules('total', 'Total Harga', 'required|numeric|trim');
@@ -97,8 +108,10 @@ class Transaksi extends CI_Controller {
     
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
-    $data['pelanggan'] = $this->db->get('pelanggan')->result_array();
+    $data['pelanggan'] = $this->transaksi->getDataPelanggan();
     $data['transaksi'] = $this->db->get_where('transaksi', ['id' => $id])->row_array();
+
+    $data['jenis_pembayaran'] = $this->transaksi->getJenisPembayaran();
     
     $this->form_validation->set_rules('no_acc', 'No Account', 'required|trim');
     $this->form_validation->set_rules('no_faktur', 'No Faktur', 'required|trim');
@@ -119,5 +132,29 @@ class Transaksi extends CI_Controller {
     }
   }
 
-  
+  // Fitur ini berguna untuk membayar pelunasan produk yang telah dipesan
+  // ketika waktu pemesanan dari 1 Jan - 31 Maret
+  public function Pelunasan(){
+    $this->load->library('form_validation');
+
+    $data['judul'] = 'Update Data Transaksi';
+    
+    
+    $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
+
+    $data['pelanggan'] = $this->transaksi->getDataPelanggan();
+    $data['jenis_pembayaran'] = $this->transaksi->getJenisPembayaran();
+
+    if($this->form_validation->run() == false){
+      $this->load->view('templates/header', $data);
+      $this->load->view('templates/sidebar', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('transaksi/pelunasan', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $this->transaksi->bayarPelunasan();
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data transaksi berhasil diubah!</div>');
+      redirect('Transaksi');
+    }
+  }
 }

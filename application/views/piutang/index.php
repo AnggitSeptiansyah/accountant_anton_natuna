@@ -21,7 +21,6 @@
                     <th>Debet</th>
                     <th>Kredit</th>
                     <th>Saldo</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,15 +36,13 @@
                       <td><?= number_format($piutang['debet']) ?></td>
                       <td><?= number_format($piutang['kredit']) ?></td>
                       <td><?= number_format($piutang['saldo']) ?></td>
-                      <td>
-                        <a href="<?= base_url() ?>Piutang/deletePiutang/<?= $piutang['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')">Delete</a>
-                      </td>
                     </tr>
                     <?php $i++ ?>
                     <?php endforeach; ?>
                   <?php endif ?>
                 </tbody>
               </table>
+              <?= $this->pagination->create_links() ?>
             </div>
           </div>
           

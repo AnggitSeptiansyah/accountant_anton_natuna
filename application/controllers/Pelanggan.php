@@ -17,12 +17,10 @@ class Pelanggan extends CI_Controller {
 
     $this->load->library('pagination');
 
-    $config['base_url'] = 'http://localhost/keuangan_anton_natuna/pelanggan/index';
+    $config['base_url'] = base_url() . 'pelanggan/index';
     $config['total_rows'] = $this->pelanggan->countAllPelanggan();
     $config['per_page'] = 10;
     $config['num-links'] = 3;
-
-    // $data['total_rows'] = $config['total_rows'];
 
     // Initialize
     $data['start'] = $this->uri->segment(3);

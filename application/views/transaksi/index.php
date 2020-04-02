@@ -45,7 +45,7 @@
                       }
                     ?>
                     <tr>
-                      <th><?= $i ?></th>
+                      <th><?= ++$start ?></th>
                       <td><?= $transaksi['tanggal'] ?></td>
                       <td><?= $transaksi['no_acc'] ?></td>
                       <td><?= $transaksi['no_faktur'] ?></td>
@@ -55,14 +55,16 @@
                       <td><?= $status ?></td>
                       <td>
                         <a class="badge badge-danger" href="<?= base_url('') ?>transaksi/update/<?= $transaksi['id'] ?>">Pembayaran</a>
-                        <a class="badge badge-dark" href="<?= base_url('') ?>transaksi/invoice/<?= $transaksi['id'] ?>">invoice</a>
-                        <a class="badge badge-success" href="<?= base_url('') ?>transaksi/surat_jalan/<?= $transaksi['id'] ?>">Surat Jalan</a>
+                        <a class="badge badge-dark" href="<?= base_url('') ?>transaksi/invoice/<?= $transaksi['id'] ?>" target="_blank">invoice</a>
+                        <a class="badge badge-success" href="<?= base_url('') ?>transaksi/surat_jalan/<?= $transaksi['id'] ?>" target="_blank">Surat Jalan</a>
                       </td>
                     </tr>
                     <?php $i++ ?>
                     <?php endforeach; ?>
                 </tbody>
               </table>
+
+              <?= $this->pagination->create_links(); ?>
             </div>
           
           </div>

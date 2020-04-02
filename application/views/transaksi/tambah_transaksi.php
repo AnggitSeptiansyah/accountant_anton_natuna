@@ -8,13 +8,7 @@
             <h1 class="h3 text-gray-800 mt-3 ml-3"><?= $judul ?></h1>
             <div class="card-body">
               <form action="" method="post" id="form_tambah_barang" name="form_tambah_barang">
-
-                <div class="form-group">
-                  <label for="">Tanggal</label>
-                  <input type="date" class="form-control col-md-3" name="tanggal" placeholder="Masukkan no acc" value="<?= set_value('tanggal') ?>">
-                  <small class="form-text text-danger"><?= form_error('tanggal') ?></small>
-                </div>
-
+              
                 <div class="form-group">
                   <label for="">No Account</label>
                   <input type="text" class="form-control" name="no_acc" placeholder="Masukkan no acc" value="<?= set_value('no_acc') ?>">

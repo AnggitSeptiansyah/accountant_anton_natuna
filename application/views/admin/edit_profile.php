@@ -6,13 +6,14 @@
             <div class="card-body">
               <h1 class="h3 mb-4 text-gray-800"><?= $judul ?></h1>
                 <?= form_open_multipart('admin/edit_profile'); ?>
+                <input type="hidden" name="id" value="<?= $user['id'] ?>">
                 <div class="form-group">
                   <label for="">Nama</label>
                   <input type="text" class="form-control" id="nama" name="nama" value="<?= $user['nama'] ?>">
                 </div>
                 <div class="form-group">
                   <label for="">Email</label>
-                  <input type="text" class="form-control" id="nama" name="email" value="<?= $user['email'] ?>">
+                  <input type="text" class="form-control" id="nama" name="email" value="<?= $user['email'] ?>" readonly>
                 </div>
 
                 <div class="form-group row">
@@ -30,7 +31,7 @@
                       </div>
                     </div>
                   </div>
-				</div>
+				      </div>
 
               <button type="submit" class="btn btn-primary">Ubah Profile</button>
                 

@@ -7,7 +7,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-7">
-                <form class="form-inline my-2 my-lg-0"  method="post" action="<?= base_url('laporankasharian') ?>">
+                <form class="form-inline my-2 my-lg-0"  method="post" action="<?= base_url('LaporanBankHarian') ?>">
                   <input class="form-control col-md-8" type="search" placeholder="Masukkan pencarian.." aria-label="Search" name="keyword">
                   <div class="input-group-append">
                     <input name="submit" class="btn btn-outline-primary" type="submit" autocomplete='off' autofocus>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-4">
                   <a href="<?= base_url('worksheet/tambah_biaya') ?>" class="btn btn-primary">Tambah Data Biaya</a>
-                  <a href="<?= base_url('laporanKasHarian/setorKeBank') ?>" class="btn btn-success">Setor ke Bank</a>
+                  <a href="<?= base_url('LaporanBankHarian/transferKeKas') ?>" class="btn btn-success">Transfer ke Kas</a>
                 </div>
               </div>
               <table class="table table-bordered table-hovered mt-3">
@@ -31,6 +31,7 @@
                     <th>Masuk</th>
                     <th>Keluar</th>
                     <th>Saldo</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>

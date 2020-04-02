@@ -68,10 +68,11 @@ class Admin_model extends CI_Model {
 
     $this->db->set('nama', $nama);
     $this->db->set('email', $email);
+    $this->db->where('id', $this->input->post('id'));
     $this->db->update('admin');
 
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kamu berhasil mengupdate Akun kamu</div>');
-    redirect('admin/profile');
+    redirect('Pelanggan');
   }
 
   public function change_password(){
