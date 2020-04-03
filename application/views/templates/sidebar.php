@@ -231,7 +231,7 @@
 </div>
 
 <li class="nav-item">
-  <a class="nav-link pb-0" href="<?= base_url('stock') ?>">
+  <a class="nav-link pb-0" href="<?= base_url('supplier') ?>">
     <i class="fas fa-fw fa-doc"></i>
     <span>Supplier</span></a> 
 </li>
@@ -323,7 +323,7 @@ Logistik
 </div>
 
 <li class="nav-item">
-<a class="nav-link pb-0" href="<?= base_url('stock') ?>">
+<a class="nav-link pb-0" href="<?= base_url('supplier') ?>">
   <i class="fas fa-fw fa-doc"></i>
   <span>Supplier</span></a> 
 </li>

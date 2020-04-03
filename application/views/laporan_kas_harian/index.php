@@ -16,7 +16,8 @@
                 </div>
                 <div class="col-md-4">
                   <a href="<?= base_url('worksheet/tambah_biaya') ?>" class="btn btn-primary">Tambah Data Biaya</a>
-                  <a href="<?= base_url('laporanKasHarian/setorKeBank') ?>" class="btn btn-success">Setor ke Bank</a>
+                  <a href="<?= base_url('LaporanKasHarian/setorKeBank') ?>" class="btn btn-success">Setor ke Bank</a>
+                  <a href="<?= base_url('Transaksi/bayarPiutang') ?>" class="btn btn-danger">Bayar Piutang</a>
                 </div>
               </div>
               <table class="table table-bordered table-hovered mt-3">
@@ -35,6 +36,7 @@
                 </thead>
                 <tbody>
                   <?php $i = 1 ?>
+                  <?php $saldo = 0 ?>
                   <?php foreach($laporan as $laporan) : ?>
                   <tr>
                     <td><?= ++$start ?></td>
@@ -45,7 +47,7 @@
                     <td><?= $laporan['no_acc'] ?></td>
                     <td><?= number_format($laporan['masuk']) ?></td>
                     <td><?= number_format($laporan['keluar']) ?></td>
-                    <td><?= number_format($laporan['saldo']) ?></td>
+                    <td><?= $saldo = $saldo + $laporan['masuk'] - $laporan['keluar'] ?></td>
                   </tr>
                   <?php $i++ ?>
                   <?php endforeach ?>

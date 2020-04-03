@@ -79,7 +79,7 @@ class Pelanggan extends CI_Controller {
     $data['pelanggan'] = $this->db->get_where('pelanggan', ['id' => $id])->row_array();
     
 
-    $this->form_validation->set_rules('kode_pelanggan', 'Kode Pelanggan', 'required|trim|is_unique[pelanggan.kode_pelanggan]');
+    $this->form_validation->set_rules('kode_pelanggan', 'Kode Pelanggan', 'required|trim');
     $this->form_validation->set_rules('nama', 'Nama Pelanggan', 'required|trim');
     $this->form_validation->set_rules('alamat', 'Alamat', 'trim');
     $this->form_validation->set_rules('telepon', 'Telepon', 'trim|numeric');

@@ -49,8 +49,14 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="">Uang yang telah Dibayar</label>
+                  <input type="text" class="form-control" name="yang_telah_dibayar" placeholder="Masukkan total yang telah dibayar oleh pelanggan" value="<?= $transaksi['uang_masuk'] ?>">
+                  <small class="form-text text-danger"><?= form_error('yang_telah_dibayar') ?></small>
+                </div>
+
+                <div class="form-group">
                   <label for="">Uang Masuk</label>
-                  <input type="text" class="form-control" name="masukan" placeholder="Masukkan Uang Masuk yang Dibayar pelanggan" value="<?= $transaksi['uang_masuk'] ?>">
+                  <input type="text" class="form-control" name="masukan" placeholder="Masukkan Uang Masuk yang Dibayar pelanggan" value="<?= set_value('masukan') ?>">
                   <small class="form-text text-danger"><?= form_error('masukan') ?></small>
                 </div>
 

@@ -116,7 +116,7 @@
     }
 
     .tulisan-kanan{
-      font-size: 13pt;
+      font-size: 15pt;
     }
 
     .capitalized {

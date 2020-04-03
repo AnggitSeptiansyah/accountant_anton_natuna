@@ -7,8 +7,8 @@
           <div class="card">
             <h1 class="h3 text-gray-800 mt-3 ml-3"><?= $judul ?></h1>
             <div class="card-body">
-              <form action="" method="post">
-              
+            <p style="color: red">Note: Fitur ini dipakai apabila pelanggan memesan sebelum bulan maret dan ingin melakukan pembayaran</p>
+              <form action="<?= base_url('Transaksi/bayarPiutang') ?>" method="post">
                 <div class="form-group">
                   <label for="">No Account</label>
                   <input type="text" class="form-control" name="no_acc" placeholder="Masukkan no acc">
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="">Total Pembayaran</label>
+                  <label for="">Total</label>
                   <input type="text" class="form-control" name="total" placeholder="Masukkan Total Harga">
                   <small class="form-text text-danger"><?= form_error('total') ?></small>
                 </div>
@@ -48,8 +48,14 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="">Uang yang telah Dibayar</label>
+                  <input type="text" class="form-control" name="yang_telah_dibayar" placeholder="Masukkan total yang telah dibayar oleh pelanggan">
+                  <small class="form-text text-danger"><?= form_error('yang_telah_dibayar') ?></small>
+                </div>
+
+                <div class="form-group">
                   <label for="">Uang Masuk</label>
-                  <input type="text" class="form-control" name="masukan" placeholder="Masukkan Uang Masuk yang Dibayar pelanggan">
+                  <input type="text" class="form-control" name="masukan" placeholder="Masukkan Uang Masuk yang Dibayar pelanggan sekarang">
                   <small class="form-text text-danger"><?= form_error('masukan') ?></small>
                 </div>
 
@@ -62,7 +68,7 @@
                   </select>
                 </div>
 
-                <button id="" class="btn btn-primary" type='submit'>Tambah Pembayaran</button>
+                <button id="" class="btn btn-primary" type='submit'>Submit</button>
               </form>
             </div>
           </div>

@@ -134,16 +134,21 @@ class Transaksi extends CI_Controller {
 
   // Fitur ini berguna untuk membayar pelunasan produk yang telah dipesan
   // ketika waktu pemesanan dari 1 Jan - 31 Maret
-  public function Pelunasan(){
+  public function bayarPiutang(){
     $this->load->library('form_validation');
 
-    $data['judul'] = 'Update Data Transaksi';
+    $data['judul'] = 'Bayar Piutang';
     
     
     $data['user'] = $this->db->get_where('admin', ['email' => $this->session->userdata['email']])->row_array();
 
     $data['pelanggan'] = $this->transaksi->getDataPelanggan();
     $data['jenis_pembayaran'] = $this->transaksi->getJenisPembayaran();
+
+    $this->form_validation->set_rules('no_acc', 'No Account', 'required|trim');
+    $this->form_validation->set_rules('total', 'Total Harga', 'required|numeric|trim');
+    $this->form_validation->set_rules('masukan', 'Uang Masuk', 'required|trim|numeric');
+    $this->form_validation->set_rules('yang_telah_dibayar', 'Uang yang Telah Dibayar', 'required|trim|numeric');
 
     if($this->form_validation->run() == false){
       $this->load->view('templates/header', $data);
@@ -152,7 +157,7 @@ class Transaksi extends CI_Controller {
       $this->load->view('transaksi/pelunasan', $data);
       $this->load->view('templates/footer');
     } else {
-      $this->transaksi->bayarPelunasan();
+      $this->transaksi->bayarPiutang();
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data transaksi berhasil diubah!</div>');
       redirect('Transaksi');
     }
